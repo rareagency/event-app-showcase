@@ -1,0 +1,25 @@
+{
+  "name": "event-app-showcase-backend",
+  "version": "0.1.0",
+  "private": true,
+  "repository": "https://github.com/rareagency/event-app-showcase.git",
+  "scripts": {
+    "lint": "eslint --fix --ext .ts .",
+    "start": "tsc && node dist/server.js"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "dotenv": "^8.2.0",
+    "envalid": "^6.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "postgraphile": "^4.6.0"
+  }
+}
