@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
+        backgroundColor: theme.backgroundColor,
         body: Center(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
@@ -23,15 +26,14 @@ class Login extends StatelessWidget {
 }
 
 class LoginInput extends StatelessWidget {
-  final textStyle = TextStyle(color: Colors.grey[800], fontSize: 20, fontFamily: 'Inter');
-  final hintStyle = TextStyle(color: Colors.grey[550], fontSize: 20, fontFamily: 'Inter');
-  final cursorColor = Colors.grey[800];
-  final iconColor = Colors.grey[800];
+  final fontSize = 20.0;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Card(
-        color: Colors.grey[200],
+        color: theme.cardColor,
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -39,8 +41,8 @@ class LoginInput extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(child: TextField(
-                cursorColor: cursorColor,
-                style: textStyle,
+                cursorColor: theme.cursorColor,
+                style: TextStyle(color: theme.hintColor, fontSize: fontSize),
                 autocorrect: false,
                 enableSuggestions: false,
                 decoration: InputDecoration(
@@ -56,19 +58,19 @@ class LoginInput extends StatelessWidget {
 
                     icon: Icon(
                       Icons.mail,
-                      color: iconColor,
+                      color: theme.primaryColor,
                       size: 38,
                     ),
 
                     contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     filled: true,
                     hintText: 'Kutsukoodisi',
-                    hintStyle: hintStyle),
+                    hintStyle: TextStyle(color: theme.hintColor, fontSize: fontSize)),
               )),
 
               IconButton(
                 icon: Icon(Icons.play_circle_filled),
-                color: iconColor,
+                color: theme.primaryColor,
                 iconSize: 30,
                 onPressed: () {},
               ),
