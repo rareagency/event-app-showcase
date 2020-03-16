@@ -62,6 +62,7 @@ class LoginInput extends StatelessWidget {
                       size: 38,
                     ),
 
+
                     contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     filled: true,
                     hintText: 'Kutsukoodisi',

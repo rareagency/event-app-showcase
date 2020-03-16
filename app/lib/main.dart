@@ -1,4 +1,4 @@
-import 'package:eventapp/login.dart';
+import 'package:eventapp/feed.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -6,12 +6,13 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Event app demo',
-        home: Login(),
+        home: Feed(),
         theme: ThemeData(
             primaryColor: Colors.grey[800],
             cardColor: Colors.grey[200],
             hintColor: Colors.grey[550],
             backgroundColor: Colors.white,
+            cursorColor: Colors.grey[800],
             fontFamily: 'Inter',
     ));
   }
