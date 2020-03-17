@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Center(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
@@ -30,10 +28,8 @@ class LoginInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Card(
-        color: theme.cardColor,
+        color: Theme.of(context).cardColor,
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -41,8 +37,8 @@ class LoginInput extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(child: TextField(
-                cursorColor: theme.cursorColor,
-                style: TextStyle(color: theme.hintColor, fontSize: fontSize),
+                cursorColor: Theme.of(context).cursorColor,
+                style: TextStyle(color: Theme.of(context).hintColor, fontSize: fontSize),
                 autocorrect: false,
                 enableSuggestions: false,
                 decoration: InputDecoration(
@@ -58,7 +54,7 @@ class LoginInput extends StatelessWidget {
 
                     icon: Icon(
                       Icons.mail,
-                      color: theme.primaryColor,
+                      color: Theme.of(context).primaryColor,
                       size: 38,
                     ),
 
@@ -66,12 +62,12 @@ class LoginInput extends StatelessWidget {
                     contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     filled: true,
                     hintText: 'Kutsukoodisi',
-                    hintStyle: TextStyle(color: theme.hintColor, fontSize: fontSize)),
+                    hintStyle: TextStyle(color: Theme.of(context).hintColor, fontSize: fontSize)),
               )),
 
               IconButton(
                 icon: Icon(Icons.play_circle_filled),
-                color: theme.primaryColor,
+                color: Theme.of(context).primaryColor,
                 iconSize: 30,
                 onPressed: () {},
               ),
