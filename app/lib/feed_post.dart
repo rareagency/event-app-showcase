@@ -1,29 +1,39 @@
+import 'package:eventapp/feed_comment.dart';
+import 'package:eventapp/timeago.dart';
 import 'package:flutter/material.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
-class FeedPost extends StatelessWidget {
+class FeedPost extends StatefulWidget {
   final String author;
   final DateTime timestamp;
   final String avatarUrl;
   final String postPictureUrl;
+  final String postText;
+  final List<FeedComment> comments;
 
   FeedPost({
-    Key key,
     @required this.author,
     @required this.timestamp,
     this.avatarUrl,
     this.postPictureUrl,
-  }) : super(key: key);
+    this.postText,
+    this.comments,
+  });
 
+  @override
+  _FeedPostState createState() => _FeedPostState();
+}
+
+class _FeedPostState extends State<FeedPost> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
           children: <Widget>[
             CircleAvatar(
               radius: 24,
-              backgroundImage: NetworkImage(this.avatarUrl),
+              backgroundImage: NetworkImage(this.widget.avatarUrl),
             ),
             SizedBox(width: 10,),
             Column(
@@ -31,7 +41,7 @@ class FeedPost extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  this.author,
+                  this.widget.author,
                   style: TextStyle(
                     letterSpacing: 0.75,
                     fontWeight: FontWeight.bold,
@@ -39,7 +49,7 @@ class FeedPost extends StatelessWidget {
                 ),
                 SizedBox(height: 4,),
                 Text(
-                  '${timeago.format(this.timestamp)}',
+                  '${Timeago.format(this.widget.timestamp)}',
                   style: TextStyle(
                     color: Theme.of(context).hintColor,
                   ),
@@ -55,14 +65,12 @@ class FeedPost extends StatelessWidget {
           ],
         ),
         SizedBox(height: 12,),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
-          child: Image(
-            image: NetworkImage(this.postPictureUrl),
-          ),
-        ),
+        getPictureWidget(),
+        getTextWidget(),
+        this.widget.comments != null ? FeedPostComments(comments: this.widget.comments) : Container(),
+
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
           child: Row(
             children: <Widget>[
               IconButton(
@@ -92,6 +100,53 @@ class FeedPost extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget getPictureWidget() {
+    if (this.widget.postPictureUrl != null) {
+      return Container(
+        margin: EdgeInsets.fromLTRB(0, 0, 0, this.widget.postText != null ? 10 : 0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: Image(
+            image: NetworkImage(this.widget.postPictureUrl),
+          ),
+        ),
+      );
+    }
+
+    return Container();
+  }
+
+  Widget getTextWidget() {
+    if (this.widget.postText != null) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Text(this.widget.postText),
+      );
+    }
+
+    return Container();
+  }
+}
+
+class FeedPostComments extends StatelessWidget {
+  final List<FeedComment> comments;
+
+  FeedPostComments({ this.comments  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(5, 5, 0, 10),
+      child: Column(
+        children: this.comments.map((comment) => FeedComment(
+          author: comment.author,
+          avatarUrl: comment.avatarUrl,
+          text: comment.text,
+        )).toList(),
+      )
     );
   }
 }
