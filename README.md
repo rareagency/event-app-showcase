@@ -24,7 +24,7 @@ Inspiration:
 	* Set path to Dart SDK on Android Studio `(Properties → Languages & Frameworks → Dart)`
   
 * Error: `Cannot find symbol 'Properties' / 'GradleException'"`
-	* [Solution]([https://github.com/flutter/flutter/issues/29608#issuecomment-548649907](https://github.com/flutter/flutter/issues/29608#issuecomment-548649907))
+	* [Solution](https://github.com/flutter/flutter/issues/29608#issuecomment-548649907)
   
 * When trying to run: `"APT: error: resource android:attr/fontVariationSettings"`
 	* Change `compileSdkVersion` in `android/app/build.gradle` to match to your SDK version.
