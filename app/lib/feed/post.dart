@@ -1,29 +1,30 @@
-import 'package:eventapp/feed_comment.dart';
+import 'package:eventapp/feed/comment.dart';
 import 'package:eventapp/timeago.dart';
 import 'package:flutter/material.dart';
 
-class FeedPost extends StatefulWidget {
+class Post extends StatefulWidget {
   final String author;
   final DateTime timestamp;
   final String avatarUrl;
   final String postPictureUrl;
   final String postText;
-  final List<FeedComment> comments;
+  final List<Comment> comments;
 
-  FeedPost({
+  Post({
+    Key key,
     @required this.author,
     @required this.timestamp,
     this.avatarUrl,
     this.postPictureUrl,
     this.postText,
     this.comments,
-  });
+  }) : super(key: key);
 
   @override
-  _FeedPostState createState() => _FeedPostState();
+  _PostState createState() => _PostState();
 }
 
-class _FeedPostState extends State<FeedPost> {
+class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -67,7 +68,7 @@ class _FeedPostState extends State<FeedPost> {
         SizedBox(height: 12,),
         getPictureWidget(),
         getTextWidget(),
-        this.widget.comments != null ? FeedPostComments(comments: this.widget.comments) : Container(),
+        this.widget.comments != null ? PostComments(comments: this.widget.comments) : Container(),
 
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -131,17 +132,17 @@ class _FeedPostState extends State<FeedPost> {
   }
 }
 
-class FeedPostComments extends StatelessWidget {
-  final List<FeedComment> comments;
+class PostComments extends StatelessWidget {
+  final List<Comment> comments;
 
-  FeedPostComments({ this.comments  });
+  PostComments({ Key key, this.comments  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(5, 5, 0, 10),
       child: Column(
-        children: this.comments.map((comment) => FeedComment(
+        children: this.comments.map((comment) => Comment(
           author: comment.author,
           avatarUrl: comment.avatarUrl,
           text: comment.text,

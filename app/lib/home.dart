@@ -1,10 +1,7 @@
-import 'dart:io';
-
-import 'package:eventapp/login.dart';
-import 'package:eventapp/profile.dart';
+import 'package:eventapp/login/login.dart';
+import 'package:eventapp/profile/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:eventapp/feed.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:eventapp/feed/feed.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,7 +10,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  File _image;
 
   List<BottomNavigationBarItem> bottomNavigationItems = [
     BottomNavigationBarItem(
@@ -53,28 +49,16 @@ class _HomeState extends State<Home> {
     if (_selectedIndex == 0) {
       return Feed();
     } else if (_selectedIndex == 1) {
-      return Login();
-    } else {
+      return Login(); // TODO: Placeholder until image picking is implemented.
+    } else if (_selectedIndex == 2) {
       return Profile();
+    } else {
+      return Container();
     }
-  }
-
-  Future getImage() async {
-    // TODO Both camera and gallery support (dropdown menu maybe?)
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      _image = image;
-    });
   }
 
   void _onItemTapped(int index) {
     print('Item index: $index');
-
-    if (index == 1) {
-      getImage();
-      return;
-    }
 
     setState(() {
       _selectedIndex = index;
