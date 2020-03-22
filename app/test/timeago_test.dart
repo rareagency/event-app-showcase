@@ -12,11 +12,6 @@ void main() {
     expect(Timeago.format(now.subtract(new Duration(seconds: 30))), 'alle minuutti sitten');
   });
 
-
-  test('Should be under minute ago', () {
-    expect(Timeago.format(now.subtract(new Duration(seconds: 30))), 'alle minuutti sitten');
-  });
-
   test('Should be 15 minutes ago', () {
     expect(Timeago.format(now.subtract(new Duration(minutes: 15))), '15 minuuttia sitten');
   });
