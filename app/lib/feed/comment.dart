@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class FeedComment extends StatefulWidget {
+class Comment extends StatefulWidget {
   final String author;
   final String avatarUrl;
   final String text;
 
-  FeedComment({ this.author, this.avatarUrl, this.text  });
+  Comment({ Key key, @required this.author, this.avatarUrl, @required this.text  }) : super(key: key);
 
   @override
-  _FeedCommentState createState() => _FeedCommentState();
+  _CommentState createState() => _CommentState();
 }
 
-class _FeedCommentState extends State<FeedComment> {
+class _CommentState extends State<Comment> {
   bool _expanded = false;
 
   @override

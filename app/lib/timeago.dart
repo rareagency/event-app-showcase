@@ -11,7 +11,9 @@ class Timeago {
 
     String result;
 
-    if (seconds < 45) {
+    if (seconds < 0) {
+      return 'tulevaisuudessa';
+    } else if (seconds < 45) {
       result = 'alle minuutti';
     } else if (seconds < 90) {
       result = 'noin minuutti';
