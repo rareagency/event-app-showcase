@@ -1,8 +1,9 @@
-import 'package:eventapp/login/login.dart';
 import 'package:eventapp/profile/profile.dart';
 import 'package:eventapp/schedule/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:eventapp/feed/feed.dart';
+
+import 'bottom_navigation.dart';
 
 class App extends StatefulWidget {
   @override
@@ -14,48 +15,27 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Route> routes = [
-      Route(icon: Icons.home, widget: Feed(),),
-      Route(icon: Icons.add_box, widget: Login(),), // TODO: Placeholder, replace with image picker
-      Route(icon: Icons.person, widget: Profile(),),
-      Route(icon: Icons.schedule, widget: Schedule(),),
+    final List<NavigationRoute> routes = [
+      NavigationRoute(icon: Icons.home, text: 'Koti', widget: Text('WIP'),),
+      NavigationRoute(icon: Icons.chat_bubble_outline, text: 'Julkaisut', widget: Feed(),),
+      NavigationRoute(icon: Icons.add_circle_outline, text: 'Lähetä', widget: Text('WIP'),),
+      NavigationRoute(icon: Icons.schedule, text: 'Aikataulu', widget: Schedule(),),
+      NavigationRoute(icon: Icons.person_outline, text: 'Sinä', widget: Profile(),),
     ];
 
     return Scaffold(
         body: SafeArea(
           child: routes[selectedTab].widget,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Theme.of(context).iconTheme.color,
-          unselectedItemColor: Theme.of(context).unselectedWidgetColor,
-          backgroundColor: Theme.of(context).bottomAppBarColor,
-          iconSize: 30,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
+        bottomNavigationBar: BottomNavigation(
+          routes: routes,
           currentIndex: selectedTab,
-          type: BottomNavigationBarType.fixed,
-
-          items: routes.map((route) => BottomNavigationBarItem(
-            icon: Icon(route.icon),
-            title: Text(''),
-          )).toList(),
-
           onTap: (index) {
             setState(() {
               selectedTab = index;
             });
           },
-        ),
+        )
     );
   }
-}
-
-class Route {
-  IconData icon;
-  Widget widget;
-
-  Route({
-    @required this.icon,
-    @required this.widget
-  });
 }
