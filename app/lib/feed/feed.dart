@@ -13,53 +13,61 @@ class _FeedState extends State<Feed> {
     List<Post> posts = [
       Post(
         avatarUrl: 'https://picsum.photos/500/500',
-        postText: 'Bussikyyti jatkoille lähtee NYT! Vikatkin messiin ja tanssijalka vipattamaan 😎😎',
+        pictureUrl: 'https://picsum.photos/500/250',
         author: "Pyry Rouvila",
+        text: 'Tosi tarttuva täyteteksti 🔥 ',
         timestamp: new DateTime.now().subtract(new Duration(minutes: 15)),
         comments: [
           Comment(
-            author: 'Matti Meikäläinen',
+            author: 'Seppo taalasmaa',
             avatarUrl: 'https://picsum.photos/233/233',
-            text: 'Tässä on tosi pitkä teksti joka valuu yli Tässä on tosi pitkä teksti joka valuu yli Tässä on tosi pitkä teksti joka valuu yli'
+            text: 'Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa.'
           ),
           Comment(
-            author: 'Teppo Teikäläinen',
-            avatarUrl: 'https://picsum.photos/235/233',
-            text: 'Nauraa'
+            author: 'Kalle Hirvola',
+            avatarUrl: 'https://picsum.photos/500/500',
+            text: 'Emoji kommentti 😎'
           ),
           Comment(
-            author: 'Soivio',
-            avatarUrl: 'https://picsum.photos/232/233',
-            text: ':D'
+              author: 'Kalle Hirvola',
+              avatarUrl: 'https://picsum.photos/500/500',
+              text: 'Emoji kommentti 2 😎'
+          ),
+          Comment(
+              author: 'Kalle Hirvola',
+              avatarUrl: 'https://picsum.photos/500/500',
+              text: 'Emoji kommentti 3 😎'
           ),
         ]
       ),
       Post(
+        pictureUrl: 'https://picsum.photos/333/250',
         avatarUrl: 'https://picsum.photos/500/500',
-        postPictureUrl: 'https://picsum.photos/500/250',
-        postText: 'Terveppä terve! :D',
+        text: 'Bussikyyti jatkoille lähtee NYT! Vikatkin messiin ja tanssijalka vipattamaan 😎😎',
         author: "Sanna Marin",
         timestamp: new DateTime.now().subtract(new Duration(minutes: 15)),
       ),
       Post(
         avatarUrl: 'https://picsum.photos/200/200',
-        postPictureUrl: 'https://picsum.photos/499/250',
+        pictureUrl: 'https://picsum.photos/499/250',
         author: "Paavo Lipponen",
         timestamp: new DateTime.now().subtract(new Duration(minutes: 12)),
       ),
     ];
 
-    return ListView.builder(
-      padding: EdgeInsets.all(16.0),
-      itemCount: posts.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: <Widget>[
-            posts[index],
-            index != posts.length - 1 ? SizedBox(height: 10) : Container(),
-          ],
-        );
-      },
+    return Scrollbar(
+      child: ListView.builder(
+        padding: EdgeInsets.all(22.0),
+        itemCount: posts.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: <Widget>[
+              posts[index],
+              index != posts.length - 1 ? SizedBox(height: 28) : Container(),
+            ],
+          );
+        },
+      ),
     );
   }
 }
