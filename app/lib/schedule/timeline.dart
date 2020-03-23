@@ -23,6 +23,7 @@ class _TimelineState extends State<Timeline> {
 
     return ListView.builder(
       shrinkWrap: true,
+      itemCount: widget.items.length,
       itemBuilder: (BuildContext context, int itemIndex) {
         var item = widget.items[itemIndex];
 
@@ -133,7 +134,6 @@ class _TimelineState extends State<Timeline> {
           ],
         );
       },
-      itemCount: widget.items.length,
     );
   }
 }

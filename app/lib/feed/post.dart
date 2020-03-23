@@ -65,89 +65,81 @@ class _PostState extends State<Post> {
             )
           ],
         ),
-        SizedBox(height: 12,),
-        getPictureWidget(),
-        getTextWidget(),
-        this.widget.comments != null ? PostComments(comments: this.widget.comments) : Container(),
 
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-          child: Row(
-            children: <Widget>[
-              IconButton(
-                icon: Icon(
-                    Icons.thumb_up,
-                    color: Theme.of(context).hintColor
-                ),
-                onPressed: () {
-                  print('Thumbs up');
-                },
-              ),
-              SizedBox(width: 12,),
-              IconButton(
-                icon: Icon(Icons.mode_comment, color: Theme.of(context).hintColor),
-                onPressed: () {
-                  print('Comments');
-                },
-              ),
-              Spacer(),
-              IconButton(
-                icon: Icon(Icons.share, color: Theme.of(context).hintColor),
-                onPressed: () {
-                  print('Share');
-                },
-              )
-            ],
+        SizedBox(height: 12,),
+
+        // Post picture
+        this.widget.postPictureUrl != null ? Container(
+          margin: EdgeInsets.fromLTRB(0, 0, 0, this.widget.postText != null ? 10 : 0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: Image(
+              image: NetworkImage(this.widget.postPictureUrl),
+            ),
           ),
-        ),
+        )  : Container(),
+
+        // Post text
+        this.widget.postText != null ? Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: Text(this.widget.postText),
+        ) : Container(),
+
+        // Post comments
+        this.widget.comments != null ? PostComments(this.widget.comments) : Container(),
+
+        ActionButtons(),
       ],
     );
   }
+}
 
-  Widget getPictureWidget() {
-    if (this.widget.postPictureUrl != null) {
-      return Container(
-        margin: EdgeInsets.fromLTRB(0, 0, 0, this.widget.postText != null ? 10 : 0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
-          child: Image(
-            image: NetworkImage(this.widget.postPictureUrl),
+class ActionButtons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        IconButton(
+          icon: Icon(
+              Icons.thumb_up,
+              color: Theme.of(context).hintColor
           ),
+          onPressed: () {
+            print('Thumbs up');
+          },
         ),
-      );
-    }
-
-    return Container();
-  }
-
-  Widget getTextWidget() {
-    if (this.widget.postText != null) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: Text(this.widget.postText),
-      );
-    }
-
-    return Container();
+        SizedBox(width: 12,),
+        IconButton(
+          icon: Icon(Icons.mode_comment, color: Theme.of(context).hintColor),
+          onPressed: () {
+            print('Comments');
+          },
+        ),
+        Spacer(),
+        IconButton(
+          icon: Icon(Icons.share, color: Theme.of(context).hintColor),
+          onPressed: () {
+            print('Share');
+          },
+        )
+      ],
+    );
   }
 }
 
 class PostComments extends StatelessWidget {
   final List<Comment> comments;
 
-  PostComments({ Key key, this.comments  }) : super(key: key);
+  PostComments(this.comments);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(5, 5, 0, 10),
-      child: Column(
-        children: this.comments.map((comment) => Comment(
-          author: comment.author,
-          avatarUrl: comment.avatarUrl,
-          text: comment.text,
-        )).toList(),
-      )
+    return Column(
+      children: comments.map((comment) => Comment(
+        author: comment.author,
+        avatarUrl: comment.avatarUrl,
+        text: comment.text,
+      )).toList(),
     );
   }
 }

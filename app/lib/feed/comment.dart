@@ -12,48 +12,48 @@ class Comment extends StatefulWidget {
 }
 
 class _CommentState extends State<Comment> {
-  bool _expanded = false;
+  bool expanded = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
-          children: [
-            CircleAvatar(
-              radius: 16,
-              backgroundImage: NetworkImage(this.widget.avatarUrl),
-            ),
-            SizedBox(width: 10,),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                      this.widget.author,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
-                        letterSpacing: 0.75,
-                      )
+        children: [
+          CircleAvatar(
+            radius: 16,
+            backgroundImage: NetworkImage(this.widget.avatarUrl),
+          ),
+          SizedBox(width: 10,),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  this.widget.author,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                    letterSpacing: 0.75,
+                  )
+                ),
+                SizedBox(height: 2,),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      this.expanded = !this.expanded;
+                    });
+                  },
+                  child: Text(
+                    this.widget.text,
+                    overflow: this.expanded ? TextOverflow.visible : TextOverflow.fade,
+                    maxLines: this.expanded ? null : 2,
                   ),
-                  SizedBox(height: 2,),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        this._expanded = !this._expanded;
-                      });
-                    },
-                    child: Text(
-                      this.widget.text,
-                      overflow: this._expanded ? TextOverflow.visible : TextOverflow.fade,
-                      maxLines: this._expanded ? null : 2,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ]
+          ),
+        ]
       ),
     );
   }
