@@ -8,7 +8,7 @@ class PostActions extends StatelessWidget {
         IconButton(
           icon: Icon(
               Icons.thumb_up,
-              color: Theme.of(context).hintColor
+              color: Theme.of(context).iconTheme.color
           ),
           onPressed: () {
             print('Thumbs up');
@@ -16,14 +16,14 @@ class PostActions extends StatelessWidget {
         ),
         SizedBox(width: 12,),
         IconButton(
-          icon: Icon(Icons.mode_comment, color: Theme.of(context).hintColor),
+          icon: Icon(Icons.mode_comment, color: Theme.of(context).iconTheme.color),
           onPressed: () {
             print('Comments');
           },
         ),
         Spacer(),
         IconButton(
-          icon: Icon(Icons.share, color: Theme.of(context).hintColor),
+          icon: Icon(Icons.share, color: Theme.of(context).iconTheme.color),
           onPressed: () {
             print('Share');
           },

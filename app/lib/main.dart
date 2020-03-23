@@ -9,6 +9,10 @@ class MyApp extends StatelessWidget {
       home: App(),
 
       theme: ThemeData.light().copyWith(
+        unselectedWidgetColor: Colors.grey[400],
+        iconTheme: IconThemeData(
+          color: Colors.grey[600],
+        ),
         textTheme: TextTheme(
           body1: TextStyle(
             color: Colors.black

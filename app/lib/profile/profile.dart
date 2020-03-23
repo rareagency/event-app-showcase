@@ -1,8 +1,36 @@
+import 'package:eventapp/profile/post_history.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    // TODO: Fetch these from API
+    String name = 'Teuvo Testaaja';
+    String firstName = name.split(' ')[0];
+    List<Post> posts = [
+      Post(
+        text: 'Bussikyyti jatkoille lähtee NYT! Vikatkin messiin ja tanssijalka vipattamaan 😎😎',
+      ),
+      Post(
+        imageUrl: 'https://picsum.photos/500/500',
+      ),
+      Post(
+        imageUrl: 'https://picsum.photos/400/500',
+      ),
+      Post(
+        imageUrl: 'https://picsum.photos/800/500',
+      ),
+      Post(
+        imageUrl: 'https://picsum.photos/540/500',
+      )
+    ];
+    bool isPersonalProfile = true;
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -12,51 +40,46 @@ class Profile extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text('Oma profiili',
-                style: TextStyle(
-                  fontSize: 24,
-                  letterSpacing: 1,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor
-                )),
+                Text(
+                  isPersonalProfile ? 'Hei $firstName!' : name,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).textTheme.body1.color
+                  )
+                ),
                 Spacer(),
                 DropdownMenu(),
               ],
             ),
-            SizedBox(height: 24,),
+
+            SizedBox(height: 28,),
+
             Center(
-                child: Column(
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 48,
-                      backgroundImage: NetworkImage('https://picsum.photos/500/500'),
-                      child: IconButton(
-                        icon: Icon(Icons.camera_alt),
-                        onPressed: () {
-                          print('Profile avatar click');
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 16,),
-                    Text(
-                        'Appi Mestari',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
-                    SizedBox(height: 12,),
-                    Text('Super appi devaaja jäbä',
-                    style: TextStyle(
-                      color: Theme.of(context).hintColor,
-                      fontSize: 15,
-                    )),
-                    SizedBox(height: 16),
-                    Divider(),
-                    SizedBox(height: 12,),
-                    ProfileGallery(),
-                  ],
-                ))
+              child: GestureDetector(
+                onTap: () {
+                  print('Changing profile picture'); // TODO
+                },
+                child: CircleAvatar(
+                  radius: 48,
+                  backgroundImage: NetworkImage('https://picsum.photos/500/500'),
+                  child: IconButton(
+                    onPressed: () {},
+                    padding: EdgeInsets.fromLTRB(45, 45, 0, 0),
+                    icon: Icon(Icons.camera_alt, color: Theme.of(context).buttonColor),
+                  ),
+                ),
+              )
+            ),
+
+            SizedBox(height: 14,),
+            Divider(),
+            SizedBox(height: 14,),
+
+            PostHistory(
+              posts: posts,
+              isPersonalProfile: isPersonalProfile,
+            ),
           ],
         ),
       ),
@@ -73,7 +96,12 @@ class DropdownMenu extends StatelessWidget {
         items: <String>['Vaihda nimi', 'Vaihda kuvaus', 'Vaihda profiilikuva'].map((String value) {
           return new DropdownMenuItem<String>(
             value: value,
-            child: new Text(value),
+            child: Text(
+              value,
+              style: TextStyle(
+                color: Theme.of(context).textTheme.body2.color,
+              )
+            ),
           );
         }).toList(),
         onChanged: handleChange,
@@ -83,37 +111,5 @@ class DropdownMenu extends StatelessWidget {
 
   void handleChange(String selected) {
     print('Selected "$selected"');
-  }
-}
-
-class ProfileGallery extends StatelessWidget {
-  final List<String> images = [
-    'https://picsum.photos/500/500',
-    'https://picsum.photos/499/499',
-    'https://picsum.photos/498/498',
-    'https://picsum.photos/497/497',
-    'https://picsum.photos/497/497',
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      physics: ScrollPhysics(),
-      shrinkWrap: true,
-      mainAxisSpacing: 6,
-      crossAxisSpacing: 6,
-      children: images.map((imgUrl) {
-        return GestureDetector(
-          onTap: () {
-            print('Clicked on $imgUrl');
-          },
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
-                child: Image.network(imgUrl),
-            )
-        );
-      }).toList(),
-    );
   }
 }
