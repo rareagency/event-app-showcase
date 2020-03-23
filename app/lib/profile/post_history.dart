@@ -20,11 +20,7 @@ class _PostHistoryState extends State<PostHistory> {
       children: <Widget>[
         hasPosts ? Text('${widget.posts.length} julkaisua',
             textAlign: TextAlign.left,
-            style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).textTheme.body1.color
-            )
+            style: Theme.of(context).textTheme.title,
         ) : Container(),
 
         SizedBox(height: 28,),

@@ -42,11 +42,7 @@ class _ProfileState extends State<Profile> {
               children: <Widget>[
                 Text(
                   isPersonalProfile ? 'Hei $firstName!' : name,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.body1.color
-                  )
+                  style: Theme.of(context).textTheme.title,
                 ),
                 Spacer(),
                 DropdownMenu(),
