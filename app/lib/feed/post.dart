@@ -1,5 +1,6 @@
-import 'package:eventapp/feed/comment.dart';
-import 'package:eventapp/timeago.dart';
+import 'package:eventapp/feed/comments.dart';
+import 'package:eventapp/feed/post_actions.dart';
+import 'package:eventapp/feed/post_header.dart';
 import 'package:flutter/material.dart';
 
 class Post extends StatefulWidget {
@@ -30,116 +31,48 @@ class _PostState extends State<Post> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
-          children: <Widget>[
-            CircleAvatar(
-              radius: 24,
-              backgroundImage: NetworkImage(this.widget.avatarUrl),
-            ),
-            SizedBox(width: 10,),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  this.widget.author,
-                  style: TextStyle(
-                    letterSpacing: 0.75,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 4,),
-                Text(
-                  '${Timeago.format(this.widget.timestamp)}',
-                  style: TextStyle(
-                    color: Theme.of(context).hintColor,
-                  ),
-                )
-              ],
-            ),
-            Spacer(),
-            IconButton(
-              icon: Icon(Icons.more_vert),
-              onPressed: () {},
-              color: Theme.of(context).hintColor,
-            )
-          ],
+
+        PostHeader(
+          timestamp: widget.timestamp,
+          avatarUrl: widget.avatarUrl,
+          author: widget.author,
         ),
 
         SizedBox(height: 12,),
 
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            this.widget.postPictureUrl != null ? Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 0, this.widget.postText != null ? 10 : 0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(9.0),
+                child: Image(
+                  image: NetworkImage(this.widget.postPictureUrl),
+                ),
+              ),
+            )  : Container(),
+
+            // Post text
+            this.widget.postText != null ? Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                this.widget.postText,
+                style: TextStyle(
+                  fontSize: 18
+                )
+
+              ),
+            ) : Container(),
+
+            // Post comments
+            PostComments(this.widget.comments),
+          ],
+        ),
         // Post picture
-        this.widget.postPictureUrl != null ? Container(
-          margin: EdgeInsets.fromLTRB(0, 0, 0, this.widget.postText != null ? 10 : 0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16.0),
-            child: Image(
-              image: NetworkImage(this.widget.postPictureUrl),
-            ),
-          ),
-        )  : Container(),
 
-        // Post text
-        this.widget.postText != null ? Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          child: Text(this.widget.postText),
-        ) : Container(),
-
-        // Post comments
-        this.widget.comments != null ? PostComments(this.widget.comments) : Container(),
-
-        ActionButtons(),
+        PostActions(),
       ],
-    );
-  }
-}
-
-class ActionButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        IconButton(
-          icon: Icon(
-              Icons.thumb_up,
-              color: Theme.of(context).hintColor
-          ),
-          onPressed: () {
-            print('Thumbs up');
-          },
-        ),
-        SizedBox(width: 12,),
-        IconButton(
-          icon: Icon(Icons.mode_comment, color: Theme.of(context).hintColor),
-          onPressed: () {
-            print('Comments');
-          },
-        ),
-        Spacer(),
-        IconButton(
-          icon: Icon(Icons.share, color: Theme.of(context).hintColor),
-          onPressed: () {
-            print('Share');
-          },
-        )
-      ],
-    );
-  }
-}
-
-class PostComments extends StatelessWidget {
-  final List<Comment> comments;
-
-  PostComments(this.comments);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: comments.map((comment) => Comment(
-        author: comment.author,
-        avatarUrl: comment.avatarUrl,
-        text: comment.text,
-      )).toList(),
     );
   }
 }

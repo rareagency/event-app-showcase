@@ -1,4 +1,4 @@
-import 'package:eventapp/feed/comment.dart';
+import 'package:eventapp/feed/comments.dart';
 import 'package:eventapp/feed/post.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +13,8 @@ class _FeedState extends State<Feed> {
     List<Post> posts = [
       Post(
         avatarUrl: 'https://picsum.photos/500/500',
-        postText: 'Terveppä terve! :D',
-        author: "Sanna Marin",
+        postText: 'Bussikyyti jatkoille lähtee NYT! Vikatkin messiin ja tanssijalka vipattamaan 😎😎',
+        author: "Pyry Rouvila",
         timestamp: new DateTime.now().subtract(new Duration(minutes: 15)),
         comments: [
           Comment(
