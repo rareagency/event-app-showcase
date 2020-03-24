@@ -26,6 +26,9 @@ class _TimelineState extends State<Timeline> {
       itemCount: widget.items.length,
       itemBuilder: (BuildContext context, int itemIndex) {
         var item = widget.items[itemIndex];
+        var hasPicture = item.pictureUrl != null;
+        var hasText = item.text != null;
+        var hasEndTime = item.endTime != null;
 
         return Stack(
           fit: StackFit.loose,
@@ -48,7 +51,7 @@ class _TimelineState extends State<Timeline> {
                           )
                       ),
 
-                      item.pictureUrl != null ? Padding(
+                      hasPicture ? Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 12.0, 0.0,
                             0.0),
                         child: Image.network(
@@ -57,7 +60,7 @@ class _TimelineState extends State<Timeline> {
                         ),
                       ) : Container(),
 
-                      item.text != null ? Padding(
+                      hasText ? Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0,
                             0.0),
                         child: Text(item.text),
@@ -82,7 +85,7 @@ class _TimelineState extends State<Timeline> {
                           fontWeight: FontWeight.bold
                       )
                   ),
-                  item.endTime != null ? Text(
+                  hasEndTime ? Text(
                       timeFormatter.format(item.endTime),
                       style: TextStyle(
                           color: Theme

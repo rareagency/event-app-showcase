@@ -27,9 +27,10 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
-    var textOnlyPost = this.widget.text != null && this.widget.pictureUrl == null;
-    var pictureOnlyPost = this.widget.text == null && this.widget.pictureUrl != null;
-    var pictureWithTextPost = this.widget.text != null && this.widget.pictureUrl != null;
+    var hasPicture = this.widget.pictureUrl != null;
+    var isTextOnlyPost = this.widget.text != null && this.widget.pictureUrl == null;
+    var isPictureOnlyPost = this.widget.text == null && this.widget.pictureUrl != null;
+    var isPictureWithTextPost = this.widget.text != null && this.widget.pictureUrl != null;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,10 +47,10 @@ class _PostState extends State<Post> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            this.widget.pictureUrl != null ? Container(
+            hasPicture ? Container(
               margin: EdgeInsets.fromLTRB(
                   0, 0, 0,
-                  !pictureOnlyPost ? 14 : 0
+                  !isPictureOnlyPost ? 14 : 0
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9.0),
@@ -63,12 +64,12 @@ class _PostState extends State<Post> {
               ),
             )  : Container(),
 
-            pictureWithTextPost ? Comment(
+            isPictureWithTextPost ? Comment(
               author: widget.author,
               text: widget.text,
             ) : Container(),
 
-            textOnlyPost ? Padding(
+            isTextOnlyPost ? Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
               child: Text(
                 this.widget.text,

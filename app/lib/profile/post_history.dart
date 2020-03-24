@@ -13,7 +13,7 @@ class PostHistory extends StatefulWidget {
 class _PostHistoryState extends State<PostHistory> {
   @override
   Widget build(BuildContext context) {
-    bool hasPosts = widget.posts != null && widget.posts.length > 0;
+    var hasPosts = widget.posts != null && widget.posts.length > 0;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,14 +25,14 @@ class _PostHistoryState extends State<PostHistory> {
 
         SizedBox(height: 28,),
 
-        widget.posts == null || widget.posts.length == 0 ? Center(
+        hasPosts ? PostGrid(widget.posts) : Center(
           child: Text(
             widget.isPersonalProfile ? 'Et ole vielä julkaissut' : 'Ei julkaisuja',
             style: TextStyle(
               color: Theme.of(context).textTheme.body2.color
             )
           ),
-        ) : PostGrid(widget.posts),
+        ),
       ],
     );
   }
