@@ -1,22 +1,41 @@
-import 'package:eventapp/home.dart';
+import 'package:eventapp/app.dart';
 import 'package:flutter/material.dart';
 
-class App extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Event app demo',
-        home: Home(),
-        theme: ThemeData(
-            primaryColor: Colors.grey[800],
-            cardColor: Colors.grey[200],
-            hintColor: Colors.grey[550],
-            backgroundColor: Colors.white,
-            cursorColor: Colors.grey[800],
-            bottomAppBarColor: Colors.grey[300],
-            fontFamily: 'Inter',
-    ));
+      title: 'Event app demo',
+      home: App(),
+
+      theme: ThemeData.light().copyWith(
+        primaryColor: Colors.blue[700],
+        unselectedWidgetColor: Colors.grey[400],
+        iconTheme: IconThemeData(
+          color: Colors.grey[600],
+        ),
+
+        appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(
+            color: Colors.blue[700],
+          )
+        ),
+        textTheme: TextTheme(
+          title: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey[900],
+          ),
+          body1: TextStyle(
+            color: Colors.grey[900]
+          ),
+          body2: TextStyle(
+            color: Colors.grey[700]
+          )
+        )
+      ),
+    );
   }
 }
 
-void main() => runApp(App());
+void main() => runApp(MyApp());

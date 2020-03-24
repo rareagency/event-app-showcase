@@ -1,6 +1,7 @@
+import 'package:eventapp/api.dart';
 import 'package:eventapp/schedule/timeline.dart';
+import 'package:eventapp/services.dart';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 
 class Schedule extends StatefulWidget {
   @override
@@ -8,47 +9,17 @@ class Schedule extends StatefulWidget {
 }
 
 class _ScheduleState extends State<Schedule> {
-  int _selectedIndex = 0;
-  List<TimelineItem> _allItems = [
-    TimelineItem(
-      startTime: DateTime.now().add(Duration(minutes: 15)),
-      endTime: DateTime.now().add(Duration(minutes: 30)),
-      title: 'Random event #1',
-      text: 'Event with end time and picture',
-      pictureUrl: 'https://picsum.photos/500/200',
-    ),
-    TimelineItem(
-      startTime: DateTime.now().add(Duration(days: 15)),
-      title: 'Random event #2',
-      text: 'Some event',
-    ),
-    TimelineItem(
-        startTime: DateTime.now().add(Duration(minutes: 15)),
-        title: 'Random event with very long name that wraps #1',
-        text: 'Some text'
-    )
-  ];
-
-  List<String> weekdays = [
-    'Maanantai',
-    'Tiistai',
-    'Keskiviikko',
-    'Torstai',
-    'Perjantai',
-    'Lauantai',
-    'Sunnuntai'
-  ];
+  var selectedTabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    var grouped = groupBy(_allItems, (TimelineItem item) =>
-      '${item.startTime.weekday}');
-    var dayNames = grouped.keys.map((key) => weekdays[int.parse(key) - 1]);
-    var currentItems = grouped.values.toList()[_selectedIndex];
+    var weekdayNames = Services.getScheduleWeekdays(scheduleItems);
+    var selectedWeekday = weekdayNames[selectedTabIndex];
+    var currentItems = Services.groupScheduleItemsByDate(scheduleItems)[selectedWeekday];
 
     return DefaultTabController(
-      length: dayNames.length,
-      initialIndex: _selectedIndex,
+      length: weekdayNames.length,
+      initialIndex: selectedTabIndex,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).appBarTheme.color,
@@ -56,11 +27,11 @@ class _ScheduleState extends State<Schedule> {
           title: Text('Aikataulu'),
           bottom: PreferredSize(
             child: TabBar(
-              onTap: this._onTapSwitch,
+              onTap: _onTapSwitch,
               isScrollable: true,
               unselectedLabelColor: Colors.white.withOpacity(0.3),
               indicatorColor: Colors.white,
-              tabs: dayNames.map((dayName) => Tab(
+              tabs: weekdayNames.map((dayName) => Tab(
                   child: Text(dayName),
                 )).toList()
               ),
@@ -70,9 +41,7 @@ class _ScheduleState extends State<Schedule> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: Timeline(
-                items: currentItems,
-              ),
+              child: Timeline(currentItems),
             ),
           ],
         ),
@@ -82,7 +51,7 @@ class _ScheduleState extends State<Schedule> {
 
   void _onTapSwitch(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedTabIndex = index;
     });
   }
 }

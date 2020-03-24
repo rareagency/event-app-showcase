@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Timeline extends StatefulWidget {
-  final List<TimelineItem> items;
+import '../models.dart';
 
-  Timeline({
-    Key key,
-    this.items,
-  }) : super(key: key);
+class Timeline extends StatefulWidget {
+  final List<TimelineItemModel> items;
+
+  Timeline(this.items, { Key key }) : super(key: key);
 
   @override
   _TimelineState createState() => _TimelineState();
@@ -23,8 +22,12 @@ class _TimelineState extends State<Timeline> {
 
     return ListView.builder(
       shrinkWrap: true,
+      itemCount: widget.items.length,
       itemBuilder: (BuildContext context, int itemIndex) {
         var item = widget.items[itemIndex];
+        var hasPicture = item.pictureUrl != null;
+        var hasText = item.text != null;
+        var hasEndTime = item.endTime != null;
 
         return Stack(
           fit: StackFit.loose,
@@ -47,7 +50,7 @@ class _TimelineState extends State<Timeline> {
                           )
                       ),
 
-                      item.pictureUrl != null ? Padding(
+                      hasPicture ? Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 12.0, 0.0,
                             0.0),
                         child: Image.network(
@@ -56,7 +59,7 @@ class _TimelineState extends State<Timeline> {
                         ),
                       ) : Container(),
 
-                      item.text != null ? Padding(
+                      hasText ? Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0,
                             0.0),
                         child: Text(item.text),
@@ -81,7 +84,7 @@ class _TimelineState extends State<Timeline> {
                           fontWeight: FontWeight.bold
                       )
                   ),
-                  item.endTime != null ? Text(
+                  hasEndTime ? Text(
                       timeFormatter.format(item.endTime),
                       style: TextStyle(
                           color: Theme
@@ -133,23 +136,7 @@ class _TimelineState extends State<Timeline> {
           ],
         );
       },
-      itemCount: widget.items.length,
     );
   }
 }
 
-class TimelineItem {
-  final DateTime startTime;
-  final DateTime endTime;
-  final String pictureUrl;
-  final String title;
-  final String text;
-
-  TimelineItem({
-    this.startTime,
-    this.endTime,
-    this.pictureUrl,
-    @required this.title,
-    this.text,
-  });
-}

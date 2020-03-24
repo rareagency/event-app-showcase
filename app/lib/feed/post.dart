@@ -1,153 +1,84 @@
-import 'package:eventapp/feed/comment.dart';
-import 'package:eventapp/timeago.dart';
+import 'package:eventapp/feed/comments.dart';
+import 'package:eventapp/feed/post_header.dart';
+import 'package:eventapp/models.dart';
 import 'package:flutter/material.dart';
 
-class Post extends StatefulWidget {
-  final String author;
-  final DateTime timestamp;
-  final String avatarUrl;
-  final String postPictureUrl;
-  final String postText;
-  final List<Comment> comments;
+class FeedPost extends StatefulWidget {
+  final FeedPostModel feedPost;
 
-  Post({
-    Key key,
-    @required this.author,
-    @required this.timestamp,
-    this.avatarUrl,
-    this.postPictureUrl,
-    this.postText,
-    this.comments,
-  }) : super(key: key);
+  FeedPost(this.feedPost, { Key key }) : super(key: key);
 
   @override
-  _PostState createState() => _PostState();
+  _FeedPostState createState() => _FeedPostState();
 }
 
-class _PostState extends State<Post> {
+class _FeedPostState extends State<FeedPost> {
   @override
   Widget build(BuildContext context) {
+    var feedPost = this.widget.feedPost;
+    var hasPicture = feedPost.pictureUrl != null;
+    var isTextOnlyPost = feedPost.text != null && feedPost.pictureUrl == null;
+    var isPictureOnlyPost = feedPost.text == null && feedPost.pictureUrl != null;
+    var isPictureWithTextPost = feedPost.text != null && feedPost.pictureUrl != null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
+
+        PostHeader(
+          timestamp: feedPost.timestamp,
+          avatarUrl: feedPost.avatarUrl,
+          author: feedPost.author,
+        ),
+
+        SizedBox(height: 12,),
+
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            CircleAvatar(
-              radius: 24,
-              backgroundImage: NetworkImage(this.widget.avatarUrl),
-            ),
-            SizedBox(width: 10,),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  this.widget.author,
-                  style: TextStyle(
-                    letterSpacing: 0.75,
-                    fontWeight: FontWeight.bold,
+            hasPicture ? Container(
+              margin: EdgeInsets.fromLTRB(
+                0, 0, 0,
+                !isPictureOnlyPost ? 14 : 0
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(9.0),
+                child: AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(feedPost.pictureUrl),
                   ),
                 ),
-                SizedBox(height: 4,),
-                Text(
-                  '${Timeago.format(this.widget.timestamp)}',
-                  style: TextStyle(
-                    color: Theme.of(context).hintColor,
-                  ),
+              ),
+            )  : Container(),
+
+            isPictureWithTextPost ? FeedComment(
+              FeedCommentModel(
+                author: feedPost.author,
+                text: feedPost.text,
+              )
+            ) : Container(),
+
+            isTextOnlyPost ? Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
+              child: Text(
+                feedPost.text,
+                style: TextStyle(
+                  fontSize: 18,
+                  height: 1.5
                 )
-              ],
+              ),
+            ) : Container(),
+
+            PostComments(
+              comments: feedPost.comments,
+              limit: 2
             ),
-            Spacer(),
-            IconButton(
-              icon: Icon(Icons.more_vert),
-              onPressed: () {},
-              color: Theme.of(context).hintColor,
-            )
           ],
         ),
-        SizedBox(height: 12,),
-        getPictureWidget(),
-        getTextWidget(),
-        this.widget.comments != null ? PostComments(comments: this.widget.comments) : Container(),
-
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-          child: Row(
-            children: <Widget>[
-              IconButton(
-                icon: Icon(
-                    Icons.thumb_up,
-                    color: Theme.of(context).hintColor
-                ),
-                onPressed: () {
-                  print('Thumbs up');
-                },
-              ),
-              SizedBox(width: 12,),
-              IconButton(
-                icon: Icon(Icons.mode_comment, color: Theme.of(context).hintColor),
-                onPressed: () {
-                  print('Comments');
-                },
-              ),
-              Spacer(),
-              IconButton(
-                icon: Icon(Icons.share, color: Theme.of(context).hintColor),
-                onPressed: () {
-                  print('Share');
-                },
-              )
-            ],
-          ),
-        ),
+        // Post picture
       ],
-    );
-  }
-
-  Widget getPictureWidget() {
-    if (this.widget.postPictureUrl != null) {
-      return Container(
-        margin: EdgeInsets.fromLTRB(0, 0, 0, this.widget.postText != null ? 10 : 0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
-          child: Image(
-            image: NetworkImage(this.widget.postPictureUrl),
-          ),
-        ),
-      );
-    }
-
-    return Container();
-  }
-
-  Widget getTextWidget() {
-    if (this.widget.postText != null) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: Text(this.widget.postText),
-      );
-    }
-
-    return Container();
-  }
-}
-
-class PostComments extends StatelessWidget {
-  final List<Comment> comments;
-
-  PostComments({ Key key, this.comments  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(5, 5, 0, 10),
-      child: Column(
-        children: this.comments.map((comment) => Comment(
-          author: comment.author,
-          avatarUrl: comment.avatarUrl,
-          text: comment.text,
-        )).toList(),
-      )
     );
   }
 }

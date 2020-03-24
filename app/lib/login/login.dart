@@ -4,7 +4,6 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
         body: Center(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20),
@@ -54,7 +53,7 @@ class LoginInput extends StatelessWidget {
 
                     icon: Icon(
                       Icons.mail,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).iconTheme.color,
                       size: 38,
                     ),
 
@@ -66,7 +65,7 @@ class LoginInput extends StatelessWidget {
 
               IconButton(
                 icon: Icon(Icons.play_circle_filled),
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).iconTheme.color,
                 iconSize: 30,
                 onPressed: () {},
               ),
