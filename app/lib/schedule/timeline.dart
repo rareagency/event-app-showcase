@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Timeline extends StatefulWidget {
-  final List<TimelineItem> items;
+import '../models.dart';
 
-  Timeline({
-    Key key,
-    this.items,
-  }) : super(key: key);
+class Timeline extends StatefulWidget {
+  final List<TimelineItemModel> items;
+
+  Timeline(this.items, { Key key }) : super(key: key);
 
   @override
   _TimelineState createState() => _TimelineState();
@@ -141,18 +140,3 @@ class _TimelineState extends State<Timeline> {
   }
 }
 
-class TimelineItem {
-  final DateTime startTime;
-  final DateTime endTime;
-  final String pictureUrl;
-  final String title;
-  final String text;
-
-  TimelineItem({
-    this.startTime,
-    this.endTime,
-    this.pictureUrl,
-    @required this.title,
-    this.text,
-  });
-}

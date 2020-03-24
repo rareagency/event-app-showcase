@@ -1,3 +1,4 @@
+import 'package:eventapp/api.dart';
 import 'package:eventapp/profile/profile.dart';
 import 'package:eventapp/schedule/schedule.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _AppState extends State<App> {
       NavigationRoute(icon: Icons.chat_bubble_outline, text: 'Julkaisut', widget: Feed(),),
       NavigationRoute(icon: Icons.add_circle_outline, text: 'Lähetä', widget: Text('WIP'),),
       NavigationRoute(icon: Icons.schedule, text: 'Aikataulu', widget: Schedule(),),
-      NavigationRoute(icon: Icons.person_outline, text: 'Sinä', widget: Profile(),),
+      NavigationRoute(icon: Icons.person_outline, text: 'Sinä', widget: Profile(profile),),
     ];
 
     return Scaffold(

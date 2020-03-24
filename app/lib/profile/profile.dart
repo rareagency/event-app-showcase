@@ -1,7 +1,14 @@
+import 'package:eventapp/models.dart';
 import 'package:eventapp/profile/post_history.dart';
 import 'package:flutter/material.dart';
 
+import '../api.dart';
+
 class Profile extends StatefulWidget {
+  final ProfileModel profile;
+
+  Profile(this.profile, { Key key }) : super(key : key);
+
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -9,27 +16,9 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    // TODO: Fetch these from API
-    String name = 'Teuvo Testaaja';
-    String firstName = name.split(' ')[0];
-    List<Post> posts = [
-      Post(
-        text: 'Bussikyyti jatkoille lähtee NYT! Vikatkin messiin ja tanssijalka vipattamaan 😎😎',
-      ),
-      Post(
-        imageUrl: 'https://picsum.photos/500/500',
-      ),
-      Post(
-        imageUrl: 'https://picsum.photos/400/500',
-      ),
-      Post(
-        imageUrl: 'https://picsum.photos/800/500',
-      ),
-      Post(
-        imageUrl: 'https://picsum.photos/540/500',
-      )
-    ];
-    bool isPersonalProfile = true;
+    var name = widget.profile.name;
+    var firstName = name.split(' ')[0];
+    var isPersonalProfile = true;
 
     return SingleChildScrollView(
       child: Padding(
@@ -41,7 +30,7 @@ class _ProfileState extends State<Profile> {
             Row(
               children: <Widget>[
                 Text(
-                  isPersonalProfile ? 'Hei $firstName!' : name,
+                  isPersonalProfile ? 'Hei $firstName!' : widget.profile.name,
                   style: Theme.of(context).textTheme.title,
                 ),
                 Spacer(),
@@ -73,7 +62,7 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: 14,),
 
             PostHistory(
-              posts: posts,
+              posts: profile.posts,
               isPersonalProfile: isPersonalProfile,
             ),
           ],
@@ -89,7 +78,7 @@ class DropdownMenu extends StatelessWidget {
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         icon: Icon(Icons.more_vert),
-        items: <String>['Vaihda nimi', 'Vaihda kuvaus', 'Vaihda profiilikuva'].map((String value) {
+        items: <String>['Vaihda kuvaus', 'Vaihda profiilikuva'].map((String value) {
           return new DropdownMenuItem<String>(
             value: value,
             child: Text(

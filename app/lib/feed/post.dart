@@ -1,45 +1,34 @@
 import 'package:eventapp/feed/comments.dart';
 import 'package:eventapp/feed/post_header.dart';
+import 'package:eventapp/models.dart';
 import 'package:flutter/material.dart';
 
-class Post extends StatefulWidget {
-  final String author;
-  final DateTime timestamp;
-  final String avatarUrl;
-  final String pictureUrl;
-  final String text;
-  final List<Comment> comments;
+class FeedPost extends StatefulWidget {
+  final FeedPostModel feedPost;
 
-  Post({
-    Key key,
-    @required this.author,
-    @required this.timestamp,
-    this.avatarUrl,
-    this.pictureUrl,
-    this.text,
-    this.comments,
-  }) : super(key: key);
+  FeedPost(this.feedPost, { Key key }) : super(key: key);
 
   @override
-  _PostState createState() => _PostState();
+  _FeedPostState createState() => _FeedPostState();
 }
 
-class _PostState extends State<Post> {
+class _FeedPostState extends State<FeedPost> {
   @override
   Widget build(BuildContext context) {
-    var hasPicture = this.widget.pictureUrl != null;
-    var isTextOnlyPost = this.widget.text != null && this.widget.pictureUrl == null;
-    var isPictureOnlyPost = this.widget.text == null && this.widget.pictureUrl != null;
-    var isPictureWithTextPost = this.widget.text != null && this.widget.pictureUrl != null;
+    var feedPost = this.widget.feedPost;
+    var hasPicture = feedPost.pictureUrl != null;
+    var isTextOnlyPost = feedPost.text != null && feedPost.pictureUrl == null;
+    var isPictureOnlyPost = feedPost.text == null && feedPost.pictureUrl != null;
+    var isPictureWithTextPost = feedPost.text != null && feedPost.pictureUrl != null;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
 
         PostHeader(
-          timestamp: widget.timestamp,
-          avatarUrl: widget.avatarUrl,
-          author: widget.author,
+          timestamp: feedPost.timestamp,
+          avatarUrl: feedPost.avatarUrl,
+          author: feedPost.author,
         ),
 
         SizedBox(height: 12,),
@@ -49,8 +38,8 @@ class _PostState extends State<Post> {
           children: <Widget>[
             hasPicture ? Container(
               margin: EdgeInsets.fromLTRB(
-                  0, 0, 0,
-                  !isPictureOnlyPost ? 14 : 0
+                0, 0, 0,
+                !isPictureOnlyPost ? 14 : 0
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9.0),
@@ -58,21 +47,23 @@ class _PostState extends State<Post> {
                   aspectRatio: 1 / 1,
                   child: Image(
                     fit: BoxFit.cover,
-                    image: NetworkImage(this.widget.pictureUrl),
+                    image: NetworkImage(feedPost.pictureUrl),
                   ),
                 ),
               ),
             )  : Container(),
 
-            isPictureWithTextPost ? Comment(
-              author: widget.author,
-              text: widget.text,
+            isPictureWithTextPost ? FeedComment(
+              FeedCommentModel(
+                author: feedPost.author,
+                text: feedPost.text,
+              )
             ) : Container(),
 
             isTextOnlyPost ? Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
               child: Text(
-                this.widget.text,
+                feedPost.text,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.5
@@ -81,7 +72,7 @@ class _PostState extends State<Post> {
             ) : Container(),
 
             PostComments(
-              comments: this.widget.comments,
+              comments: feedPost.comments,
               limit: 2
             ),
           ],

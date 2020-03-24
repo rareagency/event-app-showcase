@@ -1,7 +1,8 @@
+import 'package:eventapp/models.dart';
 import 'package:flutter/material.dart';
 
 class PostHistory extends StatefulWidget {
-  final List<Post> posts;
+  final List<ProfilePostModel> posts;
   final bool isPersonalProfile;
 
   PostHistory({ this.posts, this.isPersonalProfile });
@@ -39,7 +40,7 @@ class _PostHistoryState extends State<PostHistory> {
 }
 
 class PostGrid extends StatelessWidget {
-  final List<Post> posts;
+  final List<ProfilePostModel> posts;
 
   PostGrid(this.posts);
 
@@ -77,9 +78,3 @@ class PostGrid extends StatelessWidget {
   }
 }
 
-class Post {
-  final String imageUrl;
-  final String text;
-
-  Post({ this.imageUrl, this.text });
-}
