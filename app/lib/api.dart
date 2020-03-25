@@ -1,5 +1,9 @@
 // Only fake data for now
-import 'models.dart';
+import 'package:eventapp/models/feed_comment.dart';
+import 'package:eventapp/models/feed_post.dart';
+import 'package:eventapp/models/profile.dart';
+import 'package:eventapp/models/profile_post.dart';
+import 'package:eventapp/models/schedule_event.dart';
 
 List<FeedPostModel> feedPosts = [
   FeedPostModel(
@@ -46,20 +50,20 @@ List<FeedPostModel> feedPosts = [
   ),
 ];
 
-List<TimelineItemModel> scheduleItems = [
-  TimelineItemModel(
+List<ScheduleEvent> scheduleItems = [
+  ScheduleEvent(
     startTime: DateTime.now().add(Duration(minutes: 15)),
     endTime: DateTime.now().add(Duration(minutes: 30)),
     title: 'Random event #1',
     text: 'Event with end time and picture',
     pictureUrl: 'https://picsum.photos/500/200',
   ),
-  TimelineItemModel(
+  ScheduleEvent(
     startTime: DateTime.now().add(Duration(days: 15)),
     title: 'Random event #2',
     text: 'Some event',
   ),
-  TimelineItemModel(
+  ScheduleEvent(
       startTime: DateTime.now().add(Duration(minutes: 15)),
       title: 'Random event with very long name that wraps #1',
       text: 'Some text'

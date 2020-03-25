@@ -1,5 +1,5 @@
 import 'package:eventapp/api.dart';
-import 'package:eventapp/feed/post.dart';
+import 'package:eventapp/pages/feed/post.dart';
 import 'package:flutter/material.dart';
 
 class Feed extends StatefulWidget {

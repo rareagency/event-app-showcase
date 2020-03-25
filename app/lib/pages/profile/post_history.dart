@@ -1,4 +1,4 @@
-import 'package:eventapp/models.dart';
+import 'package:eventapp/models/profile_post.dart';
 import 'package:flutter/material.dart';
 
 class PostHistory extends StatefulWidget {

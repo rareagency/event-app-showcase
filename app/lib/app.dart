@@ -1,10 +1,9 @@
 import 'package:eventapp/api.dart';
-import 'package:eventapp/profile/profile.dart';
-import 'package:eventapp/schedule/schedule.dart';
+import 'package:eventapp/components/bottom_navigation.dart';
+import 'package:eventapp/pages/feed/feed.dart';
+import 'package:eventapp/pages/profile/profile.dart';
+import 'package:eventapp/pages/schedule/schedule.dart';
 import 'package:flutter/material.dart';
-import 'package:eventapp/feed/feed.dart';
-
-import 'bottom_navigation.dart';
 
 class App extends StatefulWidget {
   @override

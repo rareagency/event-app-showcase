@@ -1,4 +1,4 @@
-import 'package:eventapp/models.dart';
+import 'package:eventapp/models/feed_comment.dart';
 import 'package:flutter/material.dart';
 
 class PostComments extends StatelessWidget {

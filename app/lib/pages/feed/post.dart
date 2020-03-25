@@ -1,6 +1,7 @@
-import 'package:eventapp/feed/comments.dart';
-import 'package:eventapp/feed/post_header.dart';
-import 'package:eventapp/models.dart';
+import 'package:eventapp/models/feed_comment.dart';
+import 'package:eventapp/models/feed_post.dart';
+import 'package:eventapp/pages/feed/comments.dart';
+import 'package:eventapp/pages/feed/post_header.dart';
 import 'package:flutter/material.dart';
 
 class FeedPost extends StatefulWidget {

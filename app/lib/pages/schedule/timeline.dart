@@ -1,10 +1,10 @@
+import 'package:eventapp/models/schedule_event.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../models.dart';
 
 class Timeline extends StatefulWidget {
-  final List<TimelineItemModel> items;
+  final List<ScheduleEvent> items;
 
   Timeline(this.items, { Key key }) : super(key: key);
 
