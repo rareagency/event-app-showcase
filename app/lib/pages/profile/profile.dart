@@ -1,8 +1,7 @@
-import 'package:eventapp/models.dart';
-import 'package:eventapp/profile/post_history.dart';
+import 'package:eventapp/models/profile.dart';
+import 'package:eventapp/pages/profile/post_history.dart';
 import 'package:flutter/material.dart';
 
-import '../api.dart';
 
 class Profile extends StatefulWidget {
   final ProfileModel profile;
@@ -43,7 +42,7 @@ class _ProfileState extends State<Profile> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  print('Changing profile picture'); // TODO
+                  print('Changing pages.profile picture'); // TODO
                 },
                 child: CircleAvatar(
                   radius: 48,
@@ -62,7 +61,7 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: 14,),
 
             PostHistory(
-              posts: profile.posts,
+              posts: widget.profile.posts,
               isPersonalProfile: isPersonalProfile,
             ),
           ],

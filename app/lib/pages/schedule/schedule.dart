@@ -1,5 +1,5 @@
 import 'package:eventapp/api.dart';
-import 'package:eventapp/schedule/timeline.dart';
+import 'package:eventapp/pages/schedule/timeline.dart';
 import 'package:eventapp/services.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class _ScheduleState extends State<Schedule> {
   Widget build(BuildContext context) {
     var weekdayNames = Services.getScheduleWeekdays(scheduleItems);
     var selectedWeekday = weekdayNames[selectedTabIndex];
-    var currentItems = Services.groupScheduleItemsByDate(scheduleItems)[selectedWeekday];
+    var currentItems = Services.groupScheduleEventsByDate(scheduleItems)[selectedWeekday];
 
     return DefaultTabController(
       length: weekdayNames.length,
