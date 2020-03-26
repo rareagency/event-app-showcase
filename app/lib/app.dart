@@ -67,7 +67,10 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
           }).toList(),
         ),
       ),
-      bottomNavigationBar: ClipRect(
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 5)]
+        ),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (int index) {
