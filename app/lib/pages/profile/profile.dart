@@ -1,12 +1,10 @@
-import 'package:eventapp/models/profile.dart';
+import 'package:eventapp/api.dart';
 import 'package:eventapp/pages/profile/post_history.dart';
 import 'package:flutter/material.dart';
 
 
 class Profile extends StatefulWidget {
-  final ProfileModel profile;
-
-  Profile(this.profile, { Key key }) : super(key : key);
+  Profile({ Key key }) : super(key : key);
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -15,7 +13,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    var name = widget.profile.name;
+    var name = profile.name;
     var firstName = name.split(' ')[0];
     var isPersonalProfile = true;
 
@@ -29,7 +27,7 @@ class _ProfileState extends State<Profile> {
             Row(
               children: <Widget>[
                 Text(
-                  isPersonalProfile ? 'Hei $firstName!' : widget.profile.name,
+                  isPersonalProfile ? 'Hei $firstName!' : profile.name,
                   style: Theme.of(context).textTheme.title,
                 ),
                 Spacer(),
@@ -61,7 +59,7 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: 14,),
 
             PostHistory(
-              posts: widget.profile.posts,
+              posts: profile.posts,
               isPersonalProfile: isPersonalProfile,
             ),
           ],
