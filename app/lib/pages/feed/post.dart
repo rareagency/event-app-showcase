@@ -73,7 +73,7 @@ class _FeedPostState extends State<FeedPost> {
             ) : Container(),
 
             PostComments(
-              comments: feedPost.comments,
+              post: feedPost,
               limit: 2
             ),
           ],

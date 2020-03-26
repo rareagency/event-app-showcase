@@ -11,7 +11,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int selectedTab = 0;
+  int selectedTab = 1;
 
   @override
   Widget build(BuildContext context) {

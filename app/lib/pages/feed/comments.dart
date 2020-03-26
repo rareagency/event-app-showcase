@@ -1,35 +1,44 @@
 import 'package:eventapp/models/feed_comment.dart';
+import 'package:eventapp/models/feed_post.dart';
+import 'package:eventapp/pages/feed/comments_expanded.dart';
 import 'package:flutter/material.dart';
 
 class PostComments extends StatelessWidget {
-  final List<FeedCommentModel> comments;
+  final FeedPostModel post;
   final int limit;
 
-  PostComments({ this.comments, this.limit = 2 });
+  PostComments({ this.post, this.limit = 2 });
 
   @override
   Widget build(BuildContext context) {
-    if (comments == null) {
+    if (post.comments == null) {
       return Container();
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: comments.getRange(0, this.limit).map((comment) => FeedComment(comment)).toList(),
-        ),
-        this.comments.length > this.limit ? Padding(
-          padding: const EdgeInsets.fromLTRB(0, 4.0, 0, 0),
-          child: Text(
-              'Näytä kaikki ${this.comments.length} kommenttia',
-              style: TextStyle(
-                color: Theme.of(context).textTheme.body2.color,
-              ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => CommentsExpanded(post)),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: post.comments.getRange(0, this.limit).map((comment) => FeedComment(comment)).toList(),
           ),
-        ) : Container(),
-      ],
+          post.comments.length > this.limit ? Padding(
+            padding: const EdgeInsets.fromLTRB(0, 4.0, 0, 0),
+            child: Text(
+                'Näytä kaikki ${post.comments.length} kommenttia',
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.body2.color,
+                ),
+            ),
+          ) : Container(),
+        ],
+      ),
     );
   }
 }
@@ -51,8 +60,8 @@ class FeedComment extends StatelessWidget {
             TextSpan(text: comment.author + ' ', style: TextStyle(fontWeight: FontWeight.bold)),
             TextSpan(text: comment.text),
           ],
-        )
-      )
+        ),
+      ),
     );
   }
 }

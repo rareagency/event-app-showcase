@@ -5,6 +5,29 @@ import 'package:eventapp/models/profile.dart';
 import 'package:eventapp/models/profile_post.dart';
 import 'package:eventapp/models/schedule_event.dart';
 
+List<FeedCommentModel> feedComments = [
+  FeedCommentModel(
+      author: 'Seppo taalasmaa',
+      avatarUrl: 'https://picsum.photos/233/233',
+      text: 'Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa.'
+  ),
+  FeedCommentModel(
+      author: 'Kalle Hirvola',
+      avatarUrl: 'https://picsum.photos/500/500',
+      text: 'Emoji kommentti 😎'
+  ),
+  FeedCommentModel(
+      author: 'Kalle Hirvola',
+      avatarUrl: 'https://picsum.photos/500/500',
+      text: 'Emoji kommentti 2 😎'
+  ),
+  FeedCommentModel(
+      author: 'Kalle Hirvola',
+      avatarUrl: 'https://picsum.photos/500/500',
+      text: 'Emoji kommentti 3 😎'
+  ),
+];
+
 List<FeedPostModel> feedPosts = [
   FeedPostModel(
     avatarUrl: 'https://picsum.photos/500/500',
@@ -12,28 +35,7 @@ List<FeedPostModel> feedPosts = [
     author: "Pyry Rouvila",
     text: 'Tosi tarttuva täyteteksti 🔥 ',
     timestamp: new DateTime.now().subtract(new Duration(minutes: 15)),
-    comments: [
-      FeedCommentModel(
-        author: 'Seppo taalasmaa',
-        avatarUrl: 'https://picsum.photos/233/233',
-        text: 'Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa.'
-      ),
-      FeedCommentModel(
-        author: 'Kalle Hirvola',
-        avatarUrl: 'https://picsum.photos/500/500',
-        text: 'Emoji kommentti 😎'
-      ),
-      FeedCommentModel(
-        author: 'Kalle Hirvola',
-        avatarUrl: 'https://picsum.photos/500/500',
-        text: 'Emoji kommentti 2 😎'
-      ),
-      FeedCommentModel(
-        author: 'Kalle Hirvola',
-        avatarUrl: 'https://picsum.photos/500/500',
-        text: 'Emoji kommentti 3 😎'
-      ),
-    ]
+    comments: feedComments
   ),
   FeedPostModel(
     pictureUrl: 'https://picsum.photos/333/250',
