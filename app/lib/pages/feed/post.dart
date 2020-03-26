@@ -19,7 +19,6 @@ class _FeedPostState extends State<FeedPost> {
     var feedPost = this.widget.feedPost;
     var hasPicture = feedPost.pictureUrl != null;
     var isTextOnlyPost = feedPost.text != null && feedPost.pictureUrl == null;
-    var isPictureOnlyPost = feedPost.text == null && feedPost.pictureUrl != null;
     var isPictureWithTextPost = feedPost.text != null && feedPost.pictureUrl != null;
 
     return Column(
@@ -39,8 +38,7 @@ class _FeedPostState extends State<FeedPost> {
           children: <Widget>[
             hasPicture ? Container(
               margin: EdgeInsets.fromLTRB(
-                0, 0, 0,
-                !isPictureOnlyPost ? 14 : 0
+                0, 0, 0, 14
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9.0),
@@ -73,7 +71,7 @@ class _FeedPostState extends State<FeedPost> {
             ) : Container(),
 
             PostComments(
-              comments: feedPost.comments,
+              post: feedPost,
               limit: 2
             ),
           ],
