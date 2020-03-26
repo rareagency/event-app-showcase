@@ -33,7 +33,6 @@ List<FeedPostModel> feedPosts = [
     avatarUrl: 'https://picsum.photos/500/500',
     pictureUrl: 'https://picsum.photos/500/250',
     author: "Pyry Rouvila",
-    text: 'Tosi tarttuva täyteteksti 🔥 ',
     timestamp: new DateTime.now().subtract(new Duration(minutes: 15)),
     comments: feedComments
   ),
@@ -49,6 +48,7 @@ List<FeedPostModel> feedPosts = [
     pictureUrl: 'https://picsum.photos/499/250',
     author: "Paavo Lipponen",
     timestamp: new DateTime.now().subtract(new Duration(minutes: 12)),
+    comments: feedComments,
   ),
 ];
 
@@ -92,6 +92,7 @@ List<ProfilePostModel> profilePosts = [
 
 ProfileModel profile = ProfileModel(
   name: 'Teuvo Testaaja',
+  avatarUrl: 'https://picsum.photos/485/485',
   posts: [
     ProfilePostModel(
       text: 'Bussikyyti jatkoille lähtee NYT! Vikatkin messiin ja tanssijalka vipattamaan 😎😎',

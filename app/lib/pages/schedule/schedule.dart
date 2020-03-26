@@ -22,7 +22,7 @@ class _ScheduleState extends State<Schedule> {
       initialIndex: selectedTabIndex,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).appBarTheme.color,
+          backgroundColor: Theme.of(context).accentColor,
           centerTitle: true,
           title: Text('Aikataulu'),
           bottom: PreferredSize(

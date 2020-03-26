@@ -40,11 +40,11 @@ class _ProfileState extends State<Profile> {
             Center(
               child: GestureDetector(
                 onTap: () {
-                  print('Changing pages.profile picture'); // TODO
+                  print('Changing profile picture'); // TODO
                 },
                 child: CircleAvatar(
                   radius: 48,
-                  backgroundImage: NetworkImage('https://picsum.photos/500/500'),
+                  backgroundImage: NetworkImage(profile.avatarUrl),
                   child: IconButton(
                     onPressed: () {},
                     padding: EdgeInsets.fromLTRB(45, 45, 0, 0),

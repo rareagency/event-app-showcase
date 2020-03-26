@@ -84,14 +84,14 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
               activeIcon: Icon(
                   destination.icon,
                   size: 32,
-                  color: Theme.of(context).appBarTheme.iconTheme.color
+                  color: Theme.of(context).accentColor
               ),
               title: Text(
                   destination.title,
                   style: TextStyle(
                       fontSize: 12,
                       color: _currentIndex == destination.index
-                          ? Theme.of(context).appBarTheme.iconTheme.color
+                          ? Theme.of(context).accentColor
                           : Theme.of(context).textTheme.body1.color
                   ),
               ),

@@ -9,16 +9,11 @@ class MyApp extends StatelessWidget {
       home: App(),
 
       theme: ThemeData.light().copyWith(
-        primaryColor: Colors.blue[700],
+        accentColor: Colors.blue[700],
         unselectedWidgetColor: Colors.grey[400],
+        cursorColor: Colors.grey[500],
         iconTheme: IconThemeData(
           color: Colors.grey[600],
-        ),
-
-        appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(
-            color: Colors.blue[700],
-          )
         ),
         textTheme: TextTheme(
           title: TextStyle(
