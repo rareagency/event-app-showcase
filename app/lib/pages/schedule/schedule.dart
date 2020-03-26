@@ -52,7 +52,24 @@ class _ScheduleState extends State<Schedule> {
               ),
             ),
             Expanded(
-              child: Timeline(currentItems),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 16.0, 0),
+                child: Timeline(
+                  indicatorSize: 20,
+                  items: currentItems,
+                  startTimeStyle: TextStyle(
+                    color: Theme.of(context).textTheme.body1.color
+                  ),
+                  endTimeStyle: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).textTheme.body2.color
+                  ),
+                  indicatorColor: Theme.of(context).accentColor,
+                  lineColor: Theme.of(context).accentColor,
+                  lineGap: 5,
+                  gutterSpacing: 18,
+                ),
+              ),
             ),
           ],
         ),

@@ -4,6 +4,7 @@ class ScheduleEvent {
   final String pictureUrl;
   final String title;
   final String text;
+  final String location;
 
   ScheduleEvent({
     this.startTime,
@@ -11,5 +12,6 @@ class ScheduleEvent {
     this.pictureUrl,
     this.title,
     this.text,
+    this.location,
   });
 }
