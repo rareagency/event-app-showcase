@@ -57,18 +57,20 @@ List<ScheduleEvent> scheduleItems = [
     startTime: DateTime.now().add(Duration(minutes: 15)),
     endTime: DateTime.now().add(Duration(minutes: 30)),
     title: 'Random event #1',
-    text: 'Event with end time and picture',
+    text: 'Event with end time and picture. Also very long text that wraps.',
     pictureUrl: 'https://picsum.photos/500/200',
+    location: 'Sitko, Näsilinnankatu 22'
   ),
   ScheduleEvent(
     startTime: DateTime.now().add(Duration(days: 15)),
     title: 'Random event #2',
     text: 'Some event',
+    location: 'Rare, Polttimonkatu 4'
   ),
   ScheduleEvent(
-      startTime: DateTime.now().add(Duration(minutes: 15)),
-      title: 'Random event with very long name that wraps #1',
-      text: 'Some text'
+    startTime: DateTime.now().add(Duration(minutes: 15)),
+    title: 'Random event with very long name that wraps #1',
+    text: 'Some text',
   )
 ];
 

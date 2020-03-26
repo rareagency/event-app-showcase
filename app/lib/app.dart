@@ -72,6 +72,8 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
             boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 5)]
         ),
         child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showUnselectedLabels: true,
           currentIndex: _currentIndex,
           onTap: (int index) {
             setState(() {
