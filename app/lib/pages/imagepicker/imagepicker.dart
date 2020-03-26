@@ -9,7 +9,7 @@ class ImagePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('Image picker placeholder'),
+      body: Center(child: Text('Image picker placeholder')),
     );
   }
 }
