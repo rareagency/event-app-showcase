@@ -1,4 +1,5 @@
 import 'package:eventapp/api.dart';
+import 'package:eventapp/pages/schedule/tab_indicator.dart';
 import 'package:eventapp/pages/schedule/timeline.dart';
 import 'package:eventapp/services.dart';
 import 'package:flutter/material.dart';
@@ -21,25 +22,35 @@ class _ScheduleState extends State<Schedule> {
       length: weekdayNames.length,
       initialIndex: selectedTabIndex,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).accentColor,
-          centerTitle: true,
-          title: Text('Aikataulu'),
-          bottom: PreferredSize(
-            child: TabBar(
-              onTap: _onTapSwitch,
-              isScrollable: true,
-              unselectedLabelColor: Colors.white.withOpacity(0.3),
-              indicatorColor: Colors.white,
-              tabs: weekdayNames.map((dayName) => Tab(
-                  child: Text(dayName),
-                )).toList()
-              ),
-            preferredSize: Size.fromHeight(30.0)),
-        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TabBar(
+                  onTap: _onTapSwitch,
+                  isScrollable: true,
+                  labelColor: Theme.of(context).textTheme.body1.color,
+                  unselectedLabelColor: Theme.of(context).textTheme.body2.color,
+                  indicatorColor: Theme.of(context).accentColor,
+                  indicator: CupertinoishTabIndicator(
+                    color: Theme.of(context).accentColor,
+                    width: 35,
+                    radius: 2,
+                  ),
+                  labelStyle: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: -1
+                  ),
+                  tabs: weekdayNames.map((dayName) => Container(
+                    height: 50,
+                    child: Tab(
+                      child: Text(dayName),
+                    ),
+                  )).toList()
+              ),
+            ),
             Expanded(
               child: Timeline(currentItems),
             ),

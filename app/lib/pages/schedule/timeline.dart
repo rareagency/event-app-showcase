@@ -13,7 +13,7 @@ class Timeline extends StatefulWidget {
 }
 
 class _TimelineState extends State<Timeline> {
-  final timeFormatter = DateFormat('Hm');
+  final _timeFormatter = DateFormat('Hm');
 
   @override
   Widget build(BuildContext context) {
@@ -37,22 +37,20 @@ class _TimelineState extends State<Timeline> {
               child: Container(
                 margin: EdgeInsets.all(15.0),
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(
-                      0.0, circleRadius / 3, 0.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(0, circleRadius / 3, 0, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                          item.title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          )
+                        item.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        )
                       ),
 
                       hasPicture ? Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 12.0, 0.0,
-                            0.0),
+                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 0),
                         child: Image.network(
                           item.pictureUrl,
                           fit: BoxFit.fitHeight,
@@ -60,7 +58,7 @@ class _TimelineState extends State<Timeline> {
                       ) : Container(),
 
                       hasText ? Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0,
+                        padding: const EdgeInsets.fromLTRB(0, 8.0, 0,
                             0.0),
                         child: Text(item.text),
                       ) : Container()
@@ -79,17 +77,15 @@ class _TimelineState extends State<Timeline> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                      timeFormatter.format(widget.items[itemIndex].startTime),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      )
+                    _timeFormatter.format(widget.items[itemIndex].startTime),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold
+                    )
                   ),
                   hasEndTime ? Text(
-                      timeFormatter.format(item.endTime),
+                      _timeFormatter.format(item.endTime),
                       style: TextStyle(
-                          color: Theme
-                              .of(context)
-                              .hintColor
+                          color: Theme.of(context).textTheme.body2.color,
                       )
                   ) : Container()
                 ],
@@ -103,9 +99,7 @@ class _TimelineState extends State<Timeline> {
               child: Container(
                 height: double.infinity,
                 width: 1.0,
-                color: Theme
-                    .of(context)
-                    .accentColor,
+                color: Theme.of(context).accentColor,
               ),
             ),
 
@@ -117,19 +111,16 @@ class _TimelineState extends State<Timeline> {
                 width: circleRadius,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Theme
-                      .of(context)
-                      .backgroundColor,
+                  color: Theme.of(context).backgroundColor,
                 ),
                 child: Container(
                   margin: EdgeInsets.all(5.0),
                   height: 15.0,
                   width: 15.0,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme
-                          .of(context)
-                          .accentColor),
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).accentColor
+                  ),
                 ),
               ),
             )
