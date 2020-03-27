@@ -23,14 +23,17 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Inter',
             fontWeight: FontWeight.bold,
             color: Colors.grey[900],
+            letterSpacing: -1,
           ),
           body1: TextStyle(
             fontFamily: 'Inter',
-            color: Colors.grey[900]
+            color: Colors.grey[900],
+            letterSpacing: -0.5,
           ),
           body2: TextStyle(
             fontFamily: 'Inter',
-            color: Colors.grey[700]
+            color: Colors.grey[700],
+            letterSpacing: -0.5,
           ),
         )
       ),

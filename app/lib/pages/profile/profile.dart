@@ -16,6 +16,7 @@ class _ProfileState extends State<Profile> {
     var name = profile.name;
     var firstName = name.split(' ')[0];
     var isPersonalProfile = true;
+    var hasBio = profile.bio != null && profile.bio.isNotEmpty;
 
     return SingleChildScrollView(
       child: Padding(
@@ -54,9 +55,23 @@ class _ProfileState extends State<Profile> {
               )
             ),
 
-            SizedBox(height: 14,),
-            Divider(),
-            SizedBox(height: 14,),
+            SizedBox(height: 8,),
+
+            SizedBox(height: 20,),
+
+            Center(
+              child: hasBio ? Text(
+                profile.bio,
+                style: Theme.of(context).textTheme.body1,
+              ) : Text(
+                'Ei bioa',
+                style: Theme.of(context).textTheme.body2.copyWith(
+                  fontStyle: FontStyle.italic,
+                ),
+              )
+            ),
+
+            SizedBox(height: 24,),
 
             PostHistory(
               posts: profile.posts,
@@ -74,13 +89,18 @@ class DropdownMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
-        icon: Icon(Icons.more_vert),
-        items: <String>['Vaihda kuvaus', 'Vaihda profiilikuva'].map((String value) {
+        icon: Icon(
+          Icons.more_vert,
+          color: Theme.of(context).textTheme.body1.color,
+        ),
+        items: <String>['Muokkaa profiilikuvaa', 'Muokkaa bioa', 'Muokkaa nimeä'].map((String value) {
           return new DropdownMenuItem<String>(
             value: value,
             child: Text(
               value,
-              style: Theme.of(context).textTheme.body2,
+              style: Theme.of(context).textTheme.body1.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           );
         }).toList(),
