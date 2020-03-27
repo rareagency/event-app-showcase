@@ -29,9 +29,7 @@ class _PostHistoryState extends State<PostHistory> {
         hasPosts ? PostGrid(widget.posts) : Center(
           child: Text(
             widget.isPersonalProfile ? 'Et ole vielä julkaissut' : 'Ei julkaisuja',
-            style: TextStyle(
-              color: Theme.of(context).textTheme.body2.color
-            )
+            style: Theme.of(context).textTheme.body2,
           ),
         ),
       ],

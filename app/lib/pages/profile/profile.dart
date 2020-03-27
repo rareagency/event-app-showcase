@@ -80,9 +80,7 @@ class DropdownMenu extends StatelessWidget {
             value: value,
             child: Text(
               value,
-              style: TextStyle(
-                color: Theme.of(context).textTheme.body2.color,
-              )
+              style: Theme.of(context).textTheme.body2,
             ),
           );
         }).toList(),

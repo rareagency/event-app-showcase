@@ -37,10 +37,10 @@ class _ScheduleState extends State<Schedule> {
                   width: 35,
                   radius: 2,
                 ),
-                labelStyle: TextStyle(
+                labelStyle: Theme.of(context).textTheme.body1.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  letterSpacing: -1
+                  letterSpacing: -1.5
                 ),
                 tabs: weekdayNames.map((dayName) => Container(
                   height: 50,
@@ -58,13 +58,8 @@ class _ScheduleState extends State<Schedule> {
                     child: Timeline(
                       indicatorSize: 20,
                       items: dayItems,
-                      startTimeStyle: TextStyle(
-                          color: Theme.of(context).textTheme.body1.color
-                      ),
-                      endTimeStyle: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).textTheme.body2.color
-                      ),
+                      startTimeStyle: Theme.of(context).textTheme.body1,
+                      endTimeStyle: Theme.of(context).textTheme.body2,
                       indicatorColor: Theme.of(context).accentColor,
                       lineColor: Theme.of(context).accentColor,
                       lineGap: 5,

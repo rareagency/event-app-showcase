@@ -18,6 +18,7 @@ class _FeedPostState extends State<FeedPost> {
   Widget build(BuildContext context) {
     var feedPost = this.widget.feedPost;
     var hasPicture = feedPost.pictureUrl != null;
+    var hasComments = feedPost.comments != null && feedPost.comments.length > 0;
     var isTextOnlyPost = feedPost.text != null && feedPost.pictureUrl == null;
     var isPictureWithTextPost = feedPost.text != null && feedPost.pictureUrl != null;
 
@@ -36,10 +37,8 @@ class _FeedPostState extends State<FeedPost> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            hasPicture ? Container(
-              margin: EdgeInsets.fromLTRB(
-                0, 0, 0, 14
-              ),
+            hasPicture ? Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9.0),
                 child: AspectRatio(
@@ -52,15 +51,18 @@ class _FeedPostState extends State<FeedPost> {
               ),
             )  : Container(),
 
-            isPictureWithTextPost ? FeedComment(
-              FeedCommentModel(
-                author: feedPost.author,
-                text: feedPost.text,
-              )
+            isPictureWithTextPost ? Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
+              child: FeedComment(
+                  FeedCommentModel(
+                    author: feedPost.author,
+                    text: feedPost.text,
+                  )
+                ),
             ) : Container(),
 
             isTextOnlyPost ? Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
               child: Text(
                 feedPost.text,
                 style: TextStyle(
@@ -70,10 +72,13 @@ class _FeedPostState extends State<FeedPost> {
               ),
             ) : Container(),
 
-            PostComments(
-              post: feedPost,
-              limit: 2
-            ),
+            hasComments ? Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
+              child: PostComments(
+                post: feedPost,
+                limit: 2
+              ),
+            ) : Container(),
           ],
         ),
         // Post picture

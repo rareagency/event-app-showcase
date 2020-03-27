@@ -12,21 +12,26 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.blue[700],
         unselectedWidgetColor: Colors.grey[400],
         cursorColor: Colors.grey[500],
+
         iconTheme: IconThemeData(
           color: Colors.grey[600],
         ),
+
         textTheme: TextTheme(
           title: TextStyle(
             fontSize: 24,
+            fontFamily: 'Inter',
             fontWeight: FontWeight.bold,
             color: Colors.grey[900],
           ),
           body1: TextStyle(
+            fontFamily: 'Inter',
             color: Colors.grey[900]
           ),
           body2: TextStyle(
+            fontFamily: 'Inter',
             color: Colors.grey[700]
-          )
+          ),
         )
       ),
     );

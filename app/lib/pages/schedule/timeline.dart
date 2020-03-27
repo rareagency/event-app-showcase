@@ -82,8 +82,7 @@ class Timeline extends StatelessWidget {
             children: <Widget>[
               Text(
                 item.title,
-                style: TextStyle(
-                  fontSize: 14,
+                style: Theme.of(context).textTheme.body1.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -92,6 +91,7 @@ class Timeline extends StatelessWidget {
 
               hasPicture ? Column(
                 children: [
+                  SizedBox(height: 6,),
                   ClipRRect(
                     child: Image(image: NetworkImage(item.pictureUrl),),
                     borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -104,10 +104,9 @@ class Timeline extends StatelessWidget {
                 children: <Widget>[
                     Text(
                       item.text,
-                      style: TextStyle(
+                      style: Theme.of(context).textTheme.body2.copyWith(
                         fontSize: 13,
                         height: 1.5,
-                        color: Theme.of(context).textTheme.body2.color,
                       ),
                     ),
                   SizedBox(height: 10,),
@@ -124,9 +123,7 @@ class Timeline extends StatelessWidget {
                   SizedBox(width: 8,),
                   Text(
                     item.location,
-                    style: TextStyle(
-                      fontSize: 14,
-                    )
+                    style: Theme.of(context).textTheme.body1,
                   )
                 ],
               ) : Container(),
