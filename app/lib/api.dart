@@ -94,6 +94,7 @@ List<ProfilePostModel> profilePosts = [
 
 ProfileModel profile = ProfileModel(
   name: 'Teuvo Testaaja',
+  bio: 'Tiedän fronttidevaamisesta ja designaus on kivaa!',
   avatarUrl: 'https://picsum.photos/485/485',
   posts: [
     ProfilePostModel(

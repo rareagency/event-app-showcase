@@ -1,17 +1,18 @@
 import 'package:eventapp/models/feed_comment.dart';
 import 'package:eventapp/models/feed_post.dart';
+import 'package:eventapp/widgets/go_back_appbar.dart';
 import 'package:flutter/material.dart';
 
-class CommentsExpanded extends StatefulWidget {
+class ExpandedComments extends StatefulWidget {
   final FeedPostModel post;
 
-  CommentsExpanded(this.post, { Key key }) : super(key : key);
+  ExpandedComments(this.post, { Key key }) : super(key : key);
 
   @override
-  _CommentsExpandedState createState() => _CommentsExpandedState();
+  _ExpandedCommentsState createState() => _ExpandedCommentsState();
 }
 
-class _CommentsExpandedState extends State<CommentsExpanded> {
+class _ExpandedCommentsState extends State<ExpandedComments> {
   String _currentText = '';
 
   @override
@@ -19,19 +20,7 @@ class _CommentsExpandedState extends State<CommentsExpanded> {
     var postHasText = widget.post.text != null && widget.post.text.isNotEmpty;
 
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Theme.of(context).textTheme.body1.color,
-        ),
-        title: Text(
-          'Kommentit',
-          style: TextStyle(
-            color: Theme.of(context).textTheme.body1.color,
-          ),
-        ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0,
-      ),
+      appBar:  GoBackAppbar.getWidget(context),
       body: SafeArea(
         child: Column(
           children: <Widget>[
