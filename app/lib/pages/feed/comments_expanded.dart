@@ -74,10 +74,7 @@ class _CommentsExpandedState extends State<CommentsExpanded> {
                   _currentText = value;
                 });
               },
-              style: TextStyle(
-                color: Theme.of(context).textTheme.body1.color,
-                fontSize: 14,
-              ),
+              style: Theme.of(context).textTheme.body1,
               cursorColor: Theme.of(context).cursorColor,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(14, 16, 0, 0),
@@ -96,9 +93,8 @@ class _CommentsExpandedState extends State<CommentsExpanded> {
                 fillColor: Theme.of(context).scaffoldBackgroundColor,
                 filled: true,
                 hintText: 'Kirjoita kommentti...',
-                hintStyle: TextStyle(
-                    color: Theme.of(context).hintColor,
-                    fontSize: 14
+                hintStyle: Theme.of(context).textTheme.body1.copyWith(
+                    color: Theme.of(context).hintColor
                 )),
               ),
           ],

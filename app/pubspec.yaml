@@ -26,6 +26,7 @@ dependencies:
   image_picker: ^0.6.3+4
   intl: ^0.16.1
   collection: ^1.14.11
+  flutter_map: ^0.8.2
 
 dev_dependencies:
   flutter_test:
