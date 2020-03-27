@@ -3,16 +3,16 @@ import 'package:eventapp/models/feed_post.dart';
 import 'package:eventapp/widgets/go_back_appbar.dart';
 import 'package:flutter/material.dart';
 
-class CommentsExpanded extends StatefulWidget {
+class ExpandedComments extends StatefulWidget {
   final FeedPostModel post;
 
-  CommentsExpanded(this.post, { Key key }) : super(key : key);
+  ExpandedComments(this.post, { Key key }) : super(key : key);
 
   @override
-  _CommentsExpandedState createState() => _CommentsExpandedState();
+  _ExpandedCommentsState createState() => _ExpandedCommentsState();
 }
 
-class _CommentsExpandedState extends State<CommentsExpanded> {
+class _ExpandedCommentsState extends State<ExpandedComments> {
   String _currentText = '';
 
   @override
