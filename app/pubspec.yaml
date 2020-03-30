@@ -29,6 +29,8 @@ dependencies:
   flutter_map: ^0.8.2
   ant_icons: ^1.0.0
   popup_menu: ^1.0.5
+  extended_image: ^0.7.2
+  keyboard_visibility: ^0.5.6
 
 dev_dependencies:
   flutter_test:
