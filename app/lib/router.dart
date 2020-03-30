@@ -1,3 +1,4 @@
+import 'package:ant_icons/ant_icons.dart';
 import 'package:eventapp/pages/feed/feed.dart';
 import 'package:eventapp/pages/imagepicker/imagepicker.dart';
 import 'package:eventapp/pages/profile/profile.dart';
@@ -12,11 +13,11 @@ class Destination {
 }
 
 const List<Destination> allDestinations = <Destination>[
-  Destination(0, 'Koti', Icons.home),
-  Destination(1, 'Julkaisut', Icons.message),
-  Destination(2, 'Lisää', Icons.add_circle_outline),
-  Destination(3, 'Aikataulu', Icons.schedule),
-  Destination(4, 'Profiili', Icons.person_outline),
+  Destination(0, 'Koti',  AntIcons.home_outline),
+  Destination(1, 'Julkaisut', AntIcons.read_outline),
+  Destination(2, 'Lisää', AntIcons.plus_circle_outline),
+  Destination(3, 'Aikataulu', AntIcons.clock_circle_outline),
+  Destination(4, 'Profiili', AntIcons.user),
 ];
 
 

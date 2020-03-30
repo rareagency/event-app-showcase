@@ -1,10 +1,12 @@
+import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
 
 class GoBackAppbar {
   static getWidget(BuildContext context) {
     return AppBar(
-      iconTheme: IconThemeData(
-        color: Theme.of(context).textTheme.body1.color,
+      leading: new IconButton(
+        icon: new Icon(AntIcons.arrow_left, color: Theme.of(context).textTheme.body1.color),
+        onPressed: () => Navigator.of(context).pop(),
       ),
       title: Text(
         'Takaisin',
