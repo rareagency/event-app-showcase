@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(
             color: Colors.grey[600],
           ),
+          buttonColor: Colors.white.withAlpha(175),
           textTheme: TextTheme(
             title: TextStyle(
               fontSize: 24,

@@ -1,3 +1,4 @@
+import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -52,7 +53,7 @@ class LoginInput extends StatelessWidget {
                     ),
 
                     icon: Icon(
-                      Icons.mail,
+                      AntIcons.mail,
                       color: Theme.of(context).iconTheme.color,
                       size: 38,
                     ),

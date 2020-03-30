@@ -1,3 +1,4 @@
+import 'package:ant_icons/ant_icons.dart';
 import 'package:eventapp/api.dart';
 import 'package:eventapp/pages/profile/post_history.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _ProfileState extends State<Profile> {
                 child: IconButton(
                   onPressed: () {},
                   padding: EdgeInsets.fromLTRB(45, 45, 0, 0),
-                  icon: Icon(Icons.camera_alt,
+                  icon: Icon(AntIcons.camera,
                       color: Theme.of(context).buttonColor),
                 ),
               ),

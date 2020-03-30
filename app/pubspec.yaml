@@ -27,6 +27,7 @@ dependencies:
   intl: ^0.16.1
   collection: ^1.14.11
   flutter_map: ^0.8.2
+  ant_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
