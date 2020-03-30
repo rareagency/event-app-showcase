@@ -1,6 +1,5 @@
 import 'package:ant_icons/ant_icons.dart';
 import 'package:eventapp/pages/feed/feed.dart';
-import 'package:eventapp/pages/imagepicker/imagepicker.dart';
 import 'package:eventapp/pages/profile/profile.dart';
 import 'package:eventapp/pages/schedule/schedule.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +44,6 @@ class RootPage extends StatelessWidget {
         return Center(child: Text('TODO'));
       case 1:
         return Feed();
-      case 2:
-        return ImagePicker();
       case 3:
         return Schedule();
       case 4:
@@ -81,8 +78,6 @@ class _DestinationViewState extends State<DestinationView> {
             switch(settings.name) {
               case '/':
                 return RootPage(destination: widget.destination);
-              case '/imagepicker':
-                return ImagePicker(destination: widget.destination);
             }
 
             return Center(child: Text('Unknown route'));

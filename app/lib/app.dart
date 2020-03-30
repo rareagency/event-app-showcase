@@ -1,4 +1,5 @@
 import 'package:eventapp/router.dart';
+import 'package:eventapp/widgets/add_popup_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -12,6 +13,9 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
   List<AnimationController> _faders;
   AnimationController _hide;
   int _currentIndex = 0;
+
+  GlobalKey bottomNavKey = GlobalKey();
+  AddPopupMenu addPopupMenu;
 
   @override
   void initState() {
@@ -35,6 +39,8 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
 
   @override
   Widget build(BuildContext context) {
+    addPopupMenu = AddPopupMenu(context);
+
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -72,10 +78,16 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
             boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 5)]
         ),
         child: BottomNavigationBar(
+          key: bottomNavKey,
           type: BottomNavigationBarType.fixed,
           showUnselectedLabels: true,
           currentIndex: _currentIndex,
           onTap: (int index) {
+            if (index == 2) {
+              addPopupMenu.showAt(bottomNavKey);
+              return;
+            }
+
             setState(() {
               _currentIndex = index;
             });
