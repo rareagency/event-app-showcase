@@ -95,21 +95,21 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
           items: allDestinations.map((Destination destination) {
             return BottomNavigationBarItem(
               icon: Icon(
-                  destination.icon,
-                  color: Theme.of(context).textTheme.body1.color
+                destination.icon,
+                color: Theme.of(context).textTheme.body1.color
               ),
               activeIcon: Icon(
-                  destination.icon,
-                  size: 32,
-                  color: Theme.of(context).accentColor
+                destination.icon,
+                size: 32,
+                color: Theme.of(context).accentColor
               ),
               title: Text(
                   destination.title,
                   style: TextStyle(
-                      fontSize: 12,
-                      color: _currentIndex == destination.index
-                          ? Theme.of(context).accentColor
-                          : Theme.of(context).textTheme.body1.color
+                    fontSize: 12,
+                    color: _currentIndex == destination.index
+                      ? Theme.of(context).accentColor
+                      : Theme.of(context).textTheme.body1.color
                   ),
               ),
             );

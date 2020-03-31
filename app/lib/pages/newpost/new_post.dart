@@ -58,7 +58,7 @@ class _NewPostState extends State<NewPost> with TickerProviderStateMixin<NewPost
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            isImagePost ? Container(
+            if (isImagePost) Container(
               height: MediaQuery.of(context).size.height / 2,
               child: ExtendedImage.file(
                 widget.imageFile,
@@ -75,7 +75,7 @@ class _NewPostState extends State<NewPost> with TickerProviderStateMixin<NewPost
                   );
                 },
               ),
-            ) : Container(),
+            ),
 
             TextField(
               style: Theme.of(context).textTheme.body1,

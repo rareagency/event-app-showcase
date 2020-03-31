@@ -89,7 +89,7 @@ class Timeline extends StatelessWidget {
 
               SizedBox(height: 10,),
 
-              hasPicture ? Column(
+              if (hasPicture) Column(
                 children: [
                   SizedBox(height: 6,),
                   ClipRRect(
@@ -98,9 +98,9 @@ class Timeline extends StatelessWidget {
                   ),
                   SizedBox(height: 10,),
                 ],
-              ) : Container(),
+              ),
 
-              hasText ? Column(
+              if (hasText) Column(
                 children: <Widget>[
                     Text(
                       item.text,
@@ -111,9 +111,9 @@ class Timeline extends StatelessWidget {
                     ),
                   SizedBox(height: 10,),
                 ],
-              ) : Container(),
+              ),
 
-              hasLocation ? Row(
+              if (hasLocation) Row(
                 children: <Widget>[
                   Icon(
                     Icons.gps_fixed,
@@ -126,7 +126,7 @@ class Timeline extends StatelessWidget {
                     style: Theme.of(context).textTheme.body1,
                   )
                 ],
-              ) : Container(),
+              ),
             ],
           ),
         );

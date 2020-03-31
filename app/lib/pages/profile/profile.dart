@@ -69,9 +69,10 @@ class _ProfileState extends State<Profile> {
                     : Text(
                         'Ei bioa',
                         style: Theme.of(context).textTheme.body2.copyWith(
-                              fontStyle: FontStyle.italic,
-                            ),
-                      )),
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+            ),
             SizedBox(
               height: 24,
             ),
@@ -105,8 +106,8 @@ class DropdownMenu extends StatelessWidget {
             child: Text(
               value,
               style: Theme.of(context).textTheme.body1.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                fontWeight: FontWeight.bold,
+              ),
             ),
           );
         }).toList(),
