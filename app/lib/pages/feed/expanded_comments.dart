@@ -1,3 +1,4 @@
+import 'package:eventapp/app.dart';
 import 'package:eventapp/models/feed_comment.dart';
 import 'package:eventapp/models/feed_post.dart';
 import 'package:eventapp/widgets/go_back_appbar.dart';
@@ -18,6 +19,9 @@ class _ExpandedCommentsState extends State<ExpandedComments> {
   @override
   Widget build(BuildContext context) {
     var postHasText = widget.post.text != null && widget.post.text.isNotEmpty;
+    var app = context.findAncestorStateOfType<AppState>();
+
+    app.hide.reverse();
 
     return Scaffold(
       appBar:  GoBackAppbar.getWidget(context),
