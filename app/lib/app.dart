@@ -55,6 +55,7 @@ class AppState extends State<App> with TickerProviderStateMixin<App> {
                   onNavigation: () {
                     showNavBar();
                   },
+                  hideNavBar: hideNavBar,
                 ),
               ),
             );

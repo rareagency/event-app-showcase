@@ -5,8 +5,6 @@ import 'package:eventapp/pages/feed/post.dart';
 import 'package:eventapp/widgets/go_back_appbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../app.dart';
-
 class ExpandedPost extends StatelessWidget {
   final ProfilePostModel profilePost;
   final FeedPostModel feedPost = feedPosts[0]; // TODO: This needs to be fetched from API
@@ -15,9 +13,6 @@ class ExpandedPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var app = context.findAncestorStateOfType<AppState>();
-    app.hideNavBar();
-
     return Scaffold(
       appBar: GoBackAppbar.getWidget(context),
       body: SingleChildScrollView(

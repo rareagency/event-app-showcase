@@ -1,5 +1,7 @@
 import 'package:ant_icons/ant_icons.dart';
+import 'package:eventapp/pages/feed/expanded_comments.dart';
 import 'package:eventapp/pages/feed/feed.dart';
+import 'package:eventapp/pages/profile/expanded_post.dart';
 import 'package:eventapp/pages/profile/profile.dart';
 import 'package:eventapp/pages/schedule/schedule.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,10 @@ const List<Destination> allDestinations = <Destination>[
 
 
 class RootPage extends StatelessWidget {
-  const RootPage({ Key key, this.destination }) : super(key: key);
+  const RootPage({
+    Key key,
+    this.destination,
+  }) : super(key: key);
 
   final Destination destination;
 
@@ -55,10 +60,15 @@ class RootPage extends StatelessWidget {
 }
 
 class DestinationView extends StatefulWidget {
-  const DestinationView({ Key key, this.destination, this.onNavigation }) : super(key: key);
+  const DestinationView({
+    Key key, this.destination,
+    this.onNavigation,
+    this.hideNavBar,
+  }) : super(key: key);
 
   final Destination destination;
   final VoidCallback onNavigation;
+  final VoidCallback hideNavBar;
 
   @override
   _DestinationViewState createState() => _DestinationViewState();
@@ -78,6 +88,12 @@ class _DestinationViewState extends State<DestinationView> {
             switch(settings.name) {
               case '/':
                 return RootPage(destination: widget.destination);
+              case '/expanded-comments':
+                widget.hideNavBar();
+                return ExpandedComments(settings.arguments);
+              case '/profile-post':
+                widget.hideNavBar();
+                return ExpandedPost(settings.arguments);
             }
 
             return Center(child: Text('Unknown route'));
