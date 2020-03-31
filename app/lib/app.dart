@@ -5,17 +5,16 @@ import 'package:flutter/rendering.dart';
 
 class App extends StatefulWidget {
   @override
-  _AppState createState() => _AppState();
+  AppState createState() => AppState();
 }
 
-class _AppState extends State<App> with TickerProviderStateMixin<App> {
+class AppState extends State<App> with TickerProviderStateMixin<App> {
+  int _currentIndex = 0;
   List<Key> _destinationKeys;
+  GlobalKey _bottomNavKey = GlobalKey();
+  AddPopupMenu _addPopupMenu;
   List<AnimationController> _faders;
   AnimationController _hide;
-  int _currentIndex = 0;
-
-  GlobalKey bottomNavKey = GlobalKey();
-  AddPopupMenu addPopupMenu;
 
   @override
   void initState() {
@@ -26,7 +25,7 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
     }).toList();
     _faders[_currentIndex].value = 1.0;
     _destinationKeys = List<Key>.generate(allDestinations.length, (int index) => GlobalKey()).toList();
-    _hide = AnimationController(vsync: this, duration: kThemeAnimationDuration);
+    _hide = AnimationController(vsync: this, duration: kThemeAnimationDuration, value: 1);
   }
 
   @override
@@ -39,7 +38,7 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
 
   @override
   Widget build(BuildContext context) {
-    addPopupMenu = AddPopupMenu(context);
+    _addPopupMenu = AddPopupMenu(context);
 
     return Scaffold(
       body: SafeArea(
@@ -54,7 +53,7 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
                 child: DestinationView(
                   destination: destination,
                   onNavigation: () {
-                    _hide.forward();
+                    showNavBar();
                   },
                 ),
               ),
@@ -77,45 +76,57 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
         decoration: BoxDecoration(
             boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 5)]
         ),
-        child: BottomNavigationBar(
-          key: bottomNavKey,
-          type: BottomNavigationBarType.fixed,
-          showUnselectedLabels: true,
-          currentIndex: _currentIndex,
-          onTap: (int index) {
-            if (index == 2) {
-              addPopupMenu.showAt(bottomNavKey);
-              return;
-            }
+        child: SizeTransition(
+          sizeFactor: _hide,
+          axisAlignment: -1.0,
+          child: BottomNavigationBar(
+            key: _bottomNavKey,
+            type: BottomNavigationBarType.fixed,
+            showUnselectedLabels: true,
+            currentIndex: _currentIndex,
+            onTap: (int index) {
+              if (index == 2) {
+                _addPopupMenu.showAt(_bottomNavKey);
+                return;
+              }
 
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          items: allDestinations.map((Destination destination) {
-            return BottomNavigationBarItem(
-              icon: Icon(
-                destination.icon,
-                color: Theme.of(context).textTheme.body1.color
-              ),
-              activeIcon: Icon(
-                destination.icon,
-                size: 32,
-                color: Theme.of(context).accentColor
-              ),
-              title: Text(
-                  destination.title,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: _currentIndex == destination.index
-                      ? Theme.of(context).accentColor
-                      : Theme.of(context).textTheme.body1.color
-                  ),
-              ),
-            );
-          }).toList(),
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: allDestinations.map((Destination destination) {
+              return BottomNavigationBarItem(
+                icon: Icon(
+                  destination.icon,
+                  color: Theme.of(context).textTheme.body1.color
+                ),
+                activeIcon: Icon(
+                  destination.icon,
+                  size: 32,
+                  color: Theme.of(context).accentColor
+                ),
+                title: Text(
+                    destination.title,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: _currentIndex == destination.index
+                        ? Theme.of(context).accentColor
+                        : Theme.of(context).textTheme.body1.color
+                    ),
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
+  }
+
+  void hideNavBar() {
+    _hide.reverse();
+  }
+
+  void showNavBar() {
+    _hide.forward();
   }
 }
