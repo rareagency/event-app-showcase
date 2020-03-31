@@ -7,24 +7,24 @@ import 'package:eventapp/models/schedule_event.dart';
 
 List<FeedCommentModel> feedComments = [
   FeedCommentModel(
-      author: 'Seppo taalasmaa',
-      avatarUrl: 'https://picsum.photos/233/233',
-      text: 'Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa.'
+    author: 'Seppo taalasmaa',
+    avatarUrl: 'https://picsum.photos/233/233',
+    text: 'Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa. Tosi pitkä testi joka wrappaa.'
   ),
   FeedCommentModel(
-      author: 'Kalle Hirvola',
-      avatarUrl: 'https://picsum.photos/500/500',
-      text: 'Emoji kommentti 😎'
+    author: 'Kalle Hirvola',
+    avatarUrl: 'https://picsum.photos/500/500',
+    text: 'Emoji kommentti 😎'
   ),
   FeedCommentModel(
-      author: 'Kalle Hirvola',
-      avatarUrl: 'https://picsum.photos/500/500',
-      text: 'Emoji kommentti 2 😎'
+    author: 'Kalle Hirvola',
+    avatarUrl: 'https://picsum.photos/500/500',
+    text: 'Emoji kommentti 2 😎'
   ),
   FeedCommentModel(
-      author: 'Kalle Hirvola',
-      avatarUrl: 'https://picsum.photos/500/500',
-      text: 'Emoji kommentti 3 😎'
+    author: 'Kalle Hirvola',
+    avatarUrl: 'https://picsum.photos/500/500',
+    text: 'Emoji kommentti 3 😎'
   ),
 ];
 

@@ -15,6 +15,8 @@ class PostComments extends StatelessWidget {
       return Container();
     }
 
+    var isCommentLimitReached = post.comments.length > this.limit;
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
@@ -28,15 +30,16 @@ class PostComments extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: post.comments.getRange(0, this.limit).map((comment) => FeedComment(comment)).toList(),
           ),
-          post.comments.length > this.limit ? Padding(
+
+          if (isCommentLimitReached) Padding(
             padding: const EdgeInsets.fromLTRB(0, 4.0, 0, 0),
             child: Text(
-                'Näytä kaikki ${post.comments.length} kommenttia',
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.body2.color,
-                ),
+              'Näytä kaikki ${post.comments.length} kommenttia',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.body2.color,
+              ),
             ),
-          ) : Container(),
+          ),
         ],
       ),
     );

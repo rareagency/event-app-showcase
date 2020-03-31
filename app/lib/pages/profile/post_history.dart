@@ -21,10 +21,11 @@ class _PostHistoryState extends State<PostHistory> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        hasPosts ? Text('${widget.posts.length} julkaisua',
-            textAlign: TextAlign.left,
-            style: Theme.of(context).textTheme.title,
-        ) : Container(),
+        if (hasPosts) Text(
+          '${widget.posts.length} julkaisua',
+          textAlign: TextAlign.left,
+          style: Theme.of(context).textTheme.title,
+        ),
 
         SizedBox(height: 28,),
 

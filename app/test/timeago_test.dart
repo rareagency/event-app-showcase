@@ -23,5 +23,4 @@ void main() {
   test('is one year ago', () {
     expect(Timeago.format(now.subtract(new Duration(days: 365))), 'noin vuosi sitten');
   });
-
 }

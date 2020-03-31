@@ -37,7 +37,7 @@ class _FeedPostState extends State<FeedPost> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            hasPicture ? Padding(
+            if (hasPicture) Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9.0),
@@ -49,9 +49,9 @@ class _FeedPostState extends State<FeedPost> {
                   ),
                 ),
               ),
-            )  : Container(),
+            ),
 
-            isPictureWithTextPost ? Padding(
+            if (isPictureWithTextPost) Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
               child: FeedComment(
                   FeedCommentModel(
@@ -59,9 +59,9 @@ class _FeedPostState extends State<FeedPost> {
                     text: feedPost.text,
                   )
                 ),
-            ) : Container(),
+            ),
 
-            isTextOnlyPost ? Padding(
+            if (isTextOnlyPost) Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
               child: Text(
                 feedPost.text,
@@ -70,15 +70,15 @@ class _FeedPostState extends State<FeedPost> {
                   height: 1.5
                 )
               ),
-            ) : Container(),
+            ),
 
-            hasComments ? Padding(
+            if (hasComments) Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 24.0),
               child: PostComments(
                 post: feedPost,
                 limit: 2
               ),
-            ) : Container(),
+            ),
           ],
         ),
         // Post picture

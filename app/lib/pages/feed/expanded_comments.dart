@@ -24,7 +24,7 @@ class _ExpandedCommentsState extends State<ExpandedComments> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            postHasText ? Column(
+            if (postHasText) Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 0),
@@ -40,7 +40,7 @@ class _ExpandedCommentsState extends State<ExpandedComments> {
                   height: 1,
                 ),
               ]
-            ) : Container(),
+            ),
 
             Expanded(
               child: ListView.builder(
