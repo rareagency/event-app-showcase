@@ -1,6 +1,5 @@
 import 'package:eventapp/models/feed_comment.dart';
 import 'package:eventapp/models/feed_post.dart';
-import 'package:eventapp/pages/feed/expanded_comments.dart';
 import 'package:flutter/material.dart';
 
 class PostComments extends StatelessWidget {
@@ -19,8 +18,9 @@ class PostComments extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => ExpandedComments(post)),
+        Navigator.of(context).pushNamed(
+          '/expanded-comments',
+          arguments: post,
         );
       },
       child: Column(

@@ -39,7 +39,7 @@ class _ProfileState extends State<Profile> {
               height: 28,
             ),
             Center(
-                child: GestureDetector(
+              child: GestureDetector(
               onTap: () {
                 print('Changing profile picture'); // TODO
               },

@@ -14,6 +14,10 @@ class MyApp extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.grey[600],
         ),
+        highlightColor: Colors.grey[400],
+        popupMenuTheme: PopupMenuThemeData(
+          color: Colors.grey[200],
+        ),
         buttonColor: Colors.white.withAlpha(175),
         textTheme: TextTheme(
           title: TextStyle(
