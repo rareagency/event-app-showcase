@@ -19,6 +19,9 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
+      - uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: check --stacktrace
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: "1.12.13+hotfix.8"
