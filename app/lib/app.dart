@@ -1,4 +1,5 @@
 import 'package:eventapp/router.dart';
+import 'package:eventapp/state_container.dart';
 import 'package:eventapp/widgets/add_popup_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -14,7 +15,6 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
   GlobalKey _bottomNavKey = GlobalKey();
   AddPopupMenu _addPopupMenu;
   List<AnimationController> _faders;
-  AnimationController _hide;
 
   @override
   void initState() {
@@ -25,14 +25,13 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
     }).toList();
     _faders[_currentIndex].value = 1.0;
     _destinationKeys = List<Key>.generate(allDestinations.length, (int index) => GlobalKey()).toList();
-    _hide = AnimationController(vsync: this, duration: kThemeAnimationDuration, value: 1);
   }
 
   @override
   void dispose() {
     for (AnimationController controller in _faders)
       controller.dispose();
-    _hide.dispose();
+    StateContainer.of(context).navBarAnimation.dispose();
     super.dispose();
   }
 
@@ -53,9 +52,8 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
                 child: DestinationView(
                   destination: destination,
                   onNavigation: () {
-                    showNavBar();
+                    StateContainer.of(context).showNavBar();
                   },
-                  hideNavBar: hideNavBar,
                 ),
               ),
             );
@@ -78,7 +76,7 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
             boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 5)]
         ),
         child: SizeTransition(
-          sizeFactor: _hide,
+          sizeFactor: StateContainer.of(context).navBarAnimation,
           axisAlignment: -1.0,
           child: BottomNavigationBar(
             key: _bottomNavKey,
@@ -121,13 +119,5 @@ class _AppState extends State<App> with TickerProviderStateMixin<App> {
         ),
       ),
     );
-  }
-
-  void hideNavBar() {
-    _hide.reverse();
-  }
-
-  void showNavBar() {
-    _hide.forward();
   }
 }
