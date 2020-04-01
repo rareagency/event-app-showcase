@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:eventapp/widgets/go_back_appbar.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:keyboard_visibility/keyboard_visibility.dart';
 
 class NewPost extends StatefulWidget {
   final File imageFile;
@@ -18,32 +17,8 @@ class NewPost extends StatefulWidget {
 }
 
 class _NewPostState extends State<NewPost> with TickerProviderStateMixin<NewPost> {
-  final GlobalKey<ExtendedImageEditorState> editorKey = GlobalKey<ExtendedImageEditorState>();
-
+  final GlobalKey<ExtendedImageEditorState> _editorKey = GlobalKey<ExtendedImageEditorState>();
   final _scrollController = ScrollController();
-
-  @protected
-  void initState() {
-    super.initState();
-
-    KeyboardVisibilityNotification().addNewListener(
-      onChange: (bool visible) {
-        if (visible) {
-          _scrollController.animateTo(
-            MediaQuery.of(context).size.height / 2,
-            curve: Curves.easeOut,
-            duration: const Duration(milliseconds: 300),
-          );
-        } else {
-          _scrollController.animateTo(
-            0.0,
-            curve: Curves.easeOut,
-            duration: const Duration(milliseconds: 300),
-          );
-        }
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +39,7 @@ class _NewPostState extends State<NewPost> with TickerProviderStateMixin<NewPost
                 widget.imageFile,
                 fit: BoxFit.contain,
                 mode: ExtendedImageMode.editor,
-                extendedImageEditorKey: editorKey,
+                extendedImageEditorKey: _editorKey,
                 initEditorConfigHandler: (state) {
                   return EditorConfig(
                     cornerColor: Theme.of(context).accentColor,

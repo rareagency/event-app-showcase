@@ -5,10 +5,10 @@ import 'package:flutter/rendering.dart';
 
 class App extends StatefulWidget {
   @override
-  AppState createState() => AppState();
+  _AppState createState() => _AppState();
 }
 
-class AppState extends State<App> with TickerProviderStateMixin<App> {
+class _AppState extends State<App> with TickerProviderStateMixin<App> {
   int _currentIndex = 0;
   List<Key> _destinationKeys;
   GlobalKey _bottomNavKey = GlobalKey();
