@@ -1,4 +1,5 @@
 import 'package:eventapp/app.dart';
+import 'package:eventapp/state_container.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -43,4 +44,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void main() => runApp(MyApp());
+void main() => runApp(StateContainer(child: MyApp()));

@@ -1,4 +1,5 @@
 import 'package:eventapp/models/profile_post.dart';
+import 'package:eventapp/pages/profile/expanded_post.dart';
 import 'package:flutter/material.dart';
 
 class PostHistory extends StatefulWidget {
@@ -54,10 +55,8 @@ class PostGrid extends StatelessWidget {
       children: posts.map((post) {
         return GestureDetector(
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              '/profile-post',
-              arguments: post
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ExpandedPost(post)),
             );
 
             print('Clicked on ${post.toString()}');

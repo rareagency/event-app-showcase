@@ -1,5 +1,6 @@
 import 'package:eventapp/models/feed_comment.dart';
 import 'package:eventapp/models/feed_post.dart';
+import 'package:eventapp/state_container.dart';
 import 'package:eventapp/widgets/go_back_appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class _ExpandedCommentsState extends State<ExpandedComments> {
 
   @override
   Widget build(BuildContext context) {
+    StateContainer.of(context).hideNavBar();
     var postHasText = widget.post.text != null && widget.post.text.isNotEmpty;
 
     return Scaffold(

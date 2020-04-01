@@ -1,7 +1,5 @@
 import 'package:ant_icons/ant_icons.dart';
-import 'package:eventapp/pages/feed/expanded_comments.dart';
 import 'package:eventapp/pages/feed/feed.dart';
-import 'package:eventapp/pages/profile/expanded_post.dart';
 import 'package:eventapp/pages/profile/profile.dart';
 import 'package:eventapp/pages/schedule/schedule.dart';
 import 'package:flutter/material.dart';
@@ -63,12 +61,10 @@ class DestinationView extends StatefulWidget {
   const DestinationView({
     Key key, this.destination,
     this.onNavigation,
-    this.hideNavBar,
   }) : super(key: key);
 
   final Destination destination;
   final VoidCallback onNavigation;
-  final VoidCallback hideNavBar;
 
   @override
   _DestinationViewState createState() => _DestinationViewState();
@@ -85,15 +81,8 @@ class _DestinationViewState extends State<DestinationView> {
         return MaterialPageRoute(
           settings: settings,
           builder: (BuildContext context) {
-            switch(settings.name) {
-              case '/':
-                return RootPage(destination: widget.destination);
-              case '/expanded-comments':
-                widget.hideNavBar();
-                return ExpandedComments(settings.arguments);
-              case '/profile-post':
-                widget.hideNavBar();
-                return ExpandedPost(settings.arguments);
+            if (settings.name == '/') {
+              return RootPage(destination: widget.destination);
             }
 
             return Center(child: Text('Unknown route'));
