@@ -55,7 +55,7 @@ class PostGrid extends StatelessWidget {
       children: posts.map((post) {
         return GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
+            Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(builder: (context) => ExpandedPost(post)),
             );
 

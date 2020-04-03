@@ -2,7 +2,6 @@ import 'package:eventapp/api.dart';
 import 'package:eventapp/models/feed_post.dart';
 import 'package:eventapp/models/profile_post.dart';
 import 'package:eventapp/pages/feed/post.dart';
-import 'package:eventapp/state_container.dart';
 import 'package:eventapp/widgets/go_back_appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +13,6 @@ class ExpandedPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StateContainer.of(context).hideNavBar();
-
     return Scaffold(
       appBar: GoBackAppbar.getWidget(context),
       body: SingleChildScrollView(
