@@ -19,7 +19,7 @@ class PostComments extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
+        Navigator.of(context, rootNavigator: true).push(
           MaterialPageRoute(builder: (context) => ExpandedComments(post))
         );
       },

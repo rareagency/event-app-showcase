@@ -7,10 +7,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:popup_menu/popup_menu.dart';
 
 class AddPopupMenu {
+  final VoidCallback onDismiss;
   PopupMenu popupMenu;
   BuildContext context;
 
-  AddPopupMenu(BuildContext context) {
+  AddPopupMenu(BuildContext context, {
+    this.onDismiss
+  }) {
     PopupMenu.context = context;
     this.context = context;
 
@@ -24,6 +27,7 @@ class AddPopupMenu {
       lineColor: Theme.of(context).textTheme.body1.color.withAlpha(100),
       highlightColor: Theme.of(context).highlightColor,
       maxColumn: 3,
+      onDismiss: onDismiss,
       items: [
         MenuItem(
           title: 'Galleria',
