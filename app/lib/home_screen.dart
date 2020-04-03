@@ -4,6 +4,7 @@ import 'package:eventapp/pages/feed/feed.dart';
 import 'package:eventapp/pages/profile/profile.dart';
 import 'package:eventapp/pages/schedule/schedule.dart';
 import 'package:eventapp/widgets/add_popup_menu.dart';
+import 'package:eventapp/widgets/fade_indexed_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -66,14 +67,16 @@ class _HomeScreenState extends State<HomeScreen> {
     // We're preventing the root navigator from popping and closing the app
     // when the back button is pressed and the inner navigator can handle it.
     // That occurs when the inner has more than one page on its stack.
-    // You can comment the onWillPop callback and watch "the bug".
     return WillPopScope(
       onWillPop: () async =>
         !await currentFlow.navigatorKey.currentState.maybePop(),
       child: Scaffold(
-        body: IndexedStack(
+        body: FadeIndexedStack(
           index: _currentBarIndex == 2 ? _previousBarIndex : _currentBarIndex,
           children: appFlows.map(_buildIndexedPageFlow).toList(),
+          duration: Duration(
+            milliseconds: 200,
+          ),
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
