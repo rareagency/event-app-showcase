@@ -35,7 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
     AppFlow(
       title: 'Lisää',
       iconData: AntIcons.plus_circle_outline,
-      widget: Feed(),
       navigatorKey: GlobalKey<NavigatorState>(),
     ),
     AppFlow(
@@ -135,13 +134,19 @@ class _HomeScreenState extends State<HomeScreen> {
     // onGenerateRoute callback will be called only for the initial route.
     onGenerateRoute: (settings) => MaterialPageRoute(
       settings: settings,
-      builder: (context) => Scaffold(
-        body: SafeArea(
-          child: SafeArea(
-            child: appFlow.widget,
+      builder: (context) {
+        if (appFlow.widget == null) {
+          return Container();
+        }
+
+        return Scaffold(
+          body: SafeArea(
+            child: SafeArea(
+              child: appFlow.widget,
+            ),
           ),
-        ),
-      ),
+        );
+      },
     ),
   );
 }

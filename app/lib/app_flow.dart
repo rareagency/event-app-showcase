@@ -4,11 +4,10 @@ class AppFlow {
   const AppFlow({
     @required this.title,
     @required this.iconData,
-    @required this.widget,
     @required this.navigatorKey,
+    this.widget,
   })  : assert(title != null),
         assert(iconData != null),
-        assert(widget != null),
         assert(navigatorKey != null);
 
   final String title;
