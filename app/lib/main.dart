@@ -1,4 +1,4 @@
-import 'package:eventapp/home_screen.dart';
+import 'package:eventapp/pages/login/login.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,7 +6,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Event app demo',
-      home: HomeScreen(),
+      home: Login(),
       theme: ThemeData.light().copyWith(
         accentColor: Colors.blue[700],
         unselectedWidgetColor: Colors.grey[400],

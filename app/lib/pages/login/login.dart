@@ -1,78 +1,180 @@
+import 'dart:ui';
+
 import 'package:ant_icons/ant_icons.dart';
+import 'package:eventapp/pages/login/uppercase_text_formatter.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  var _currentText = '';
+  var _textFieldSelected = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+    var touched = _textFieldSelected || _currentText.isNotEmpty;
+
+    return Container(
+      alignment: Alignment.bottomCenter,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/login_background.png'),
+          fit: BoxFit.fitHeight,
+          alignment: Alignment.topLeft,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+            setState(() {
+              _textFieldSelected = false;
+            });
+          },
+          child: SafeArea(
+            child: Stack(
+              alignment: Alignment.center,
               children: <Widget>[
-                Image.asset('assets/event_logo.png'),
-                SizedBox(
-                  height: 30.0,
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: RotatedBox(
+                      quarterTurns: 5,
+                      child: Image.asset(
+                        'assets/rare_logo.png',
+                        width: MediaQuery.of(context).size.width / 4,
+                      ),
+                    ),
+                  ),
                 ),
-                LoginInput(),
+
+                Positioned(
+                  bottom: -(MediaQuery.of(context).size.width * 1.1),
+                  child: Container(
+                    height: MediaQuery.of(context).size.width * 1.75,
+                    width: MediaQuery.of(context).size.width * 1.75,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color(0xff570663).withAlpha(50),
+                          const Color(0xffF23765).withAlpha(230),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        stops: [0.0, 0.5],
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                  )
+                ),
+
+                Positioned(
+                  top: 0,
+                  child: Container(
+                    color: Colors.white.withAlpha(20),
+                    height: MediaQuery.of(context).size.width / 3,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ),
+
+                Positioned(
+                  bottom: 75.0,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          'INVITATION CODE',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 16,
+                            letterSpacing: 1,
+                            color: Colors.white,
+                          )
+                        ),
+
+                        SizedBox(height: 16),
+
+                        TextField(
+                          cursorColor: Colors.grey[500],
+                          maxLength: 12,
+                          maxLengthEnforced: true,
+                          textAlign: TextAlign.center,
+                          inputFormatters: [
+                            UppercaseTextFormatter(),
+                          ],
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          style: TextStyle(
+                            fontFamily: 'Roboto Mono',
+                            color: Colors.grey[400],
+                            fontSize: 18,
+                          ),
+
+                          decoration: InputDecoration(
+                            counterText: '',
+                            filled: true,
+                            contentPadding: touched
+                              ? const EdgeInsets.fromLTRB(20.0, 0, 0.0, 0)
+                              : const EdgeInsets.fromLTRB(0.0, 0, 0.0, 0),
+                            hintText: _textFieldSelected ? '': '',
+                            hintStyle: TextStyle(
+                              fontFamily: 'Inter',
+                              color: Colors.grey[400],
+                              fontSize: 16,
+                            ),
+                            suffixIcon:
+                            touched
+                              ? GestureDetector(
+                                onTap: () => this.handleSubmit(_currentText),
+                                child: Icon(
+                                  AntIcons.login,
+                                  size: 30,
+                                  color: Colors.grey[400],
+                                ),
+                              ) : null,
+                            fillColor: Colors.black.withAlpha(150),
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(7.0),
+                              ),
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
+                            ),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              _currentText = value;
+                            });
+                          },
+                          onTap: () {
+                            setState(() {
+                              _textFieldSelected = true;
+                            });
+                          },
+                          onSubmitted: handleSubmit
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
+  }
+
+  void handleSubmit(String value) {
+    print('Submitted: $value');
   }
 }
-
-class LoginInput extends StatelessWidget {
-  final fontSize = 20.0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        color: Theme.of(context).cardColor,
-        elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 10.0, vertical: 10.0),
-          child: Row(
-            children: <Widget>[
-              Expanded(child: TextField(
-                cursorColor: Theme.of(context).cursorColor,
-                style: TextStyle(color: Theme.of(context).hintColor, fontSize: fontSize),
-                autocorrect: false,
-                enableSuggestions: false,
-                decoration: InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(10.0),
-                      ),
-                      borderSide: BorderSide(
-                        width: 0,
-                        style: BorderStyle.none,
-                      ),
-                    ),
-
-                    icon: Icon(
-                      AntIcons.mail,
-                      color: Theme.of(context).iconTheme.color,
-                      size: 38,
-                    ),
-
-                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    filled: true,
-                    hintText: 'Kutsukoodisi',
-                    hintStyle: TextStyle(color: Theme.of(context).hintColor, fontSize: fontSize)),
-              )),
-
-              IconButton(
-                icon: Icon(Icons.play_circle_filled),
-                color: Theme.of(context).iconTheme.color,
-                iconSize: 30,
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ));
-  }
-}
-
