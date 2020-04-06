@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:ant_icons/ant_icons.dart';
+import 'package:eventapp/home_screen.dart';
 import 'package:eventapp/pages/login/uppercase_text_formatter.dart';
 import 'package:flutter/material.dart';
 
@@ -10,12 +11,18 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  var _currentText = '';
+  var _textController = TextEditingController();
   var _textFieldSelected = false;
 
   @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var touched = _textFieldSelected || _currentText.isNotEmpty;
+    var touched = _textFieldSelected || _textController.text.isNotEmpty;
 
     return Container(
       alignment: Alignment.bottomCenter,
@@ -102,6 +109,7 @@ class _LoginState extends State<Login> {
                         SizedBox(height: 16),
 
                         TextField(
+                          controller: _textController,
                           cursorColor: Colors.grey[500],
                           maxLength: 12,
                           maxLengthEnforced: true,
@@ -123,7 +131,7 @@ class _LoginState extends State<Login> {
                             contentPadding: touched
                               ? const EdgeInsets.fromLTRB(20.0, 0, 0.0, 0)
                               : const EdgeInsets.fromLTRB(0.0, 0, 0.0, 0),
-                            hintText: _textFieldSelected ? '': '',
+                            hintText: _textFieldSelected ? '' : 'Enter invitation code',
                             hintStyle: TextStyle(
                               fontFamily: 'Inter',
                               color: Colors.grey[400],
@@ -132,7 +140,7 @@ class _LoginState extends State<Login> {
                             suffixIcon:
                             touched
                               ? GestureDetector(
-                                onTap: () => this.handleSubmit(_currentText),
+                                onTap: this.handleSubmit,
                                 child: Icon(
                                   AntIcons.login,
                                   size: 30,
@@ -150,17 +158,12 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                           ),
-                          onChanged: (value) {
-                            setState(() {
-                              _currentText = value;
-                            });
-                          },
                           onTap: () {
                             setState(() {
                               _textFieldSelected = true;
                             });
                           },
-                          onSubmitted: handleSubmit
+                          onSubmitted: (value) => this.handleSubmit(),
                         ),
                       ],
                     ),
@@ -174,7 +177,12 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void handleSubmit(String value) {
-    print('Submitted: $value');
+  void handleSubmit() {
+    print('Submitted: ${_textController.text}');
+    // TODO: Check login here
+
+    Navigator.pushReplacement(context, MaterialPageRoute(
+      builder: (context) => HomeScreen()
+    ));
   }
 }
