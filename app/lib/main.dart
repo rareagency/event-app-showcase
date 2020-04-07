@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Event app demo',
-      home: HomeScreen(),
+      home: Login(),
       theme: ThemeData.light().copyWith(
         accentColor: Colors.blue[700],
         unselectedWidgetColor: Colors.grey[400],
