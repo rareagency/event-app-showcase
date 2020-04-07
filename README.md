@@ -1,5 +1,7 @@
 # Event app showcase
 
+![flutter build and test](https://github.com/rareagency/event-app-showcase/workflows/flutter%20build%20and%20test/badge.svg)
+
 Main features:
 
 - Instagram-ish feed
