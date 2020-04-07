@@ -1,4 +1,4 @@
-import 'package:eventapp/models/schedule_event.dart';
+import 'package:eventapp/pages/schedule/model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -32,7 +32,7 @@ class Timeline extends StatelessWidget {
         assert(indicators == null);
 
 
-  final List<ScheduleEvent> items;
+  final List<ScheduleEventModel> items;
   final double itemGap;
   final double gutterSpacing;
   final List<Widget> indicators;

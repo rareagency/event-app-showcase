@@ -1,17 +1,18 @@
 import 'package:collection/collection.dart';
-import 'package:eventapp/models/schedule_event.dart';
+import 'package:eventapp/pages/schedule/model.dart';
 
 class Services {
   static String getWeekday(DateTime date) {
     return weekdays[date.weekday];
   }
 
-  static List<String> getScheduleWeekdays(List<ScheduleEvent> items) {
+  static List<String> getScheduleWeekdays(List<ScheduleEventModel> items) {
     return groupScheduleEventsByDate(items).keys.toList();
   }
 
-  static Map<String, List<ScheduleEvent>> groupScheduleEventsByDate(List<ScheduleEvent> items) {
-    return groupBy(items, (ScheduleEvent item) => getWeekday(item.startTime));
+  static Map<String, List<ScheduleEventModel>>
+    groupScheduleEventsByDate(List<ScheduleEventModel> items) {
+    return groupBy(items, (ScheduleEventModel item) => getWeekday(item.startTime));
   }
 }
 

@@ -3,7 +3,6 @@ import 'package:eventapp/models/feed_comment.dart';
 import 'package:eventapp/models/feed_post.dart';
 import 'package:eventapp/models/profile.dart';
 import 'package:eventapp/models/profile_post.dart';
-import 'package:eventapp/models/schedule_event.dart';
 
 List<FeedCommentModel> feedComments = [
   FeedCommentModel(
@@ -50,28 +49,6 @@ List<FeedPostModel> feedPosts = [
     timestamp: new DateTime.now().subtract(new Duration(minutes: 12)),
     comments: feedComments,
   ),
-];
-
-List<ScheduleEvent> scheduleItems = [
-  ScheduleEvent(
-    startTime: DateTime.now().add(Duration(minutes: 15)),
-    endTime: DateTime.now().add(Duration(minutes: 30)),
-    title: 'Random event #1',
-    text: 'Event with end time and picture. Also very long text that wraps.',
-    pictureUrl: 'https://picsum.photos/500/200',
-    location: 'Sitko, Näsilinnankatu 22'
-  ),
-  ScheduleEvent(
-    startTime: DateTime.now().add(Duration(days: 15)),
-    title: 'Random event #2',
-    text: 'Some event',
-    location: 'Rare, Polttimonkatu 4'
-  ),
-  ScheduleEvent(
-    startTime: DateTime.now().add(Duration(minutes: 15)),
-    title: 'Random event with very long name that wraps #1',
-    text: 'Some text',
-  )
 ];
 
 List<ProfilePostModel> profilePosts = [

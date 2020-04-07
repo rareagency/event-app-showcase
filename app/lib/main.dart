@@ -1,5 +1,29 @@
+import 'package:eventapp/env.dart';
 import 'package:eventapp/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+
+
+Future<void> main() async {
+  var env = EnvironmentVariables();
+  await env.load();
+
+  final HttpLink link = HttpLink(
+    uri: env.graphQLEndPoint,
+  );
+
+  ValueNotifier<GraphQLClient> client = ValueNotifier(
+    GraphQLClient(
+      cache: InMemoryCache(),
+      link: link,
+    ),
+  );
+
+  return runApp(GraphQLProvider(
+    client: client,
+    child: MyApp(),
+  ));
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -43,4 +67,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void main() => runApp(MyApp());
