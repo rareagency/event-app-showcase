@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'app/*'
   pull_request:
 
 jobs:
@@ -18,10 +20,10 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-java@v1
         with:
-          java-version: "12.x"
+          java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.12.13+hotfix.8"
+          flutter-version: '1.12.13+hotfix.8'
       - run: flutter pub get
         working-directory: ${{env.working-directory}}
       - run: flutter test

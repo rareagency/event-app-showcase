@@ -42,11 +42,18 @@ dev_dependencies:
 flutter:
 
   fonts:
+    - family: Roboto Mono
+      fonts:
+        - asset: fonts/RobotoMono-Medium.ttf
+
     - family: Inter
       fonts:
         - asset: fonts/Inter-Regular.ttf
+          weight: 400
         - asset: fonts/Inter-SemiBold.ttf
           weight: 700
+        - asset: fonts/Inter-Black.ttf
+          weight: 900
         - asset: fonts/Inter-Italic.ttf
           style: italic
 
