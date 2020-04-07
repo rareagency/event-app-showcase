@@ -4,7 +4,7 @@ class EnvironmentVariables {
   String graphQLEndPoint;
 
   Future<void> load() async {
-    await DotEnv().load('.env');
+    await DotEnv().load('assets/.env');
     var env = DotEnv().env;
     this.graphQLEndPoint = env['GRAPHQL_ENDPOINT'];
   }
