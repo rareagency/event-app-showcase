@@ -1,8 +1,10 @@
-import 'package:eventapp/api.dart';
+import 'package:eventapp/pages/schedule/model.dart';
+import 'package:eventapp/pages/schedule/schedule_gql.dart';
 import 'package:eventapp/pages/schedule/tab_indicator.dart';
 import 'package:eventapp/pages/schedule/timeline.dart';
 import 'package:eventapp/services.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class Schedule extends StatefulWidget {
   @override
@@ -14,8 +16,31 @@ class _ScheduleState extends State<Schedule> {
 
   @override
   Widget build(BuildContext context) {
-    var weekdayNames = Services.getScheduleWeekdays(scheduleItems);
-    var scheduleEventsByDate = Services.groupScheduleEventsByDate(scheduleItems);
+    return Query(
+      options: QueryOptions(
+        documentNode: gql(getScheduleEvents),
+      ),
+      builder: (result, { refetch, fetchMore }) {
+        if (result.hasException) {
+          return Center(child: Text(result.exception.toString()));
+        }
+
+        if (result.loading) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        List<dynamic> nodes = result.data['scheduleEvents']['nodes'];
+        List<ScheduleEventModel> scheduleEvents =
+          nodes.map((node) => ScheduleEventModel.fromJson(node)).toList();
+
+        return scheduleComponent(scheduleEvents);
+      },
+    );
+  }
+
+  Widget scheduleComponent(List<ScheduleEventModel> scheduleEvents) {
+    var weekdayNames = Services.getScheduleWeekdays(scheduleEvents);
+    var scheduleEventsByDate = Services.groupScheduleEventsByDate(scheduleEvents);
 
     return DefaultTabController(
       length: weekdayNames.length,
