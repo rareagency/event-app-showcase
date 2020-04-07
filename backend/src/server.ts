@@ -12,3 +12,8 @@ http
     })
   )
   .listen(env.GRAPHQL_PORT);
+
+console.log(`
+GraphQL server: http://localhost:${env.GRAPHQL_PORT}/graphql
+GraphiQL server: http://localhost:${env.GRAPHQL_PORT}/graphiql
+`);
