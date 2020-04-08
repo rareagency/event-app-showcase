@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Event app demo',
-      home: HomeScreen(), // TODO: Switch this to Login() once invitations done
+      title: 'Event app',
+      home: HomeScreen(), // TODO: Change this to Login() once time is right :)
       theme: ThemeData.light().copyWith(
         accentColor: Colors.blue[700],
         unselectedWidgetColor: Colors.grey[400],

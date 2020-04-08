@@ -3,6 +3,7 @@ import 'package:eventapp/app_flow.dart';
 import 'package:eventapp/pages/feed/feed.dart';
 import 'package:eventapp/pages/profile/profile.dart';
 import 'package:eventapp/pages/schedule/schedule.dart';
+import 'package:eventapp/services.dart';
 import 'package:eventapp/widgets/add_popup_menu.dart';
 import 'package:eventapp/widgets/fade_indexed_stack.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentBarIndex = 0;
   int _previousBarIndex;
-  GlobalKey _bottomNavKey = GlobalKey();
   AddPopupMenu _addPopupMenu;
+  var _bottomNavKey = GlobalKey();
+  var _connectionService = ConnectionService();
 
   final List<AppFlow> appFlows = [
     AppFlow(
@@ -52,8 +54,21 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _connectionService.checkConnection(context);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _connectionService.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final currentFlow = appFlows[_currentBarIndex];
+
     _addPopupMenu = AddPopupMenu(
       context,
       onDismiss: () {
