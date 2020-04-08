@@ -1,9 +1,21 @@
+import 'dart:async';
+
 import 'package:ant_icons/ant_icons.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
 class Disconnected extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    StreamSubscription subscription;
+
+    subscription = Connectivity().onConnectivityChanged.listen((result) {
+      if (result != ConnectivityResult.none) {
+        Navigator.pop(context);
+        subscription.cancel();
+      }
+    });
+
     return Scaffold(
       body: Center(
         child: Column(

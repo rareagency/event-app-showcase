@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:ant_icons/ant_icons.dart';
 import 'package:eventapp/home_screen.dart';
 import 'package:eventapp/pages/login/uppercase_text_formatter.dart';
+import 'package:eventapp/services.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -13,11 +14,19 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   var _textController = TextEditingController();
   var _textFieldSelected = false;
+  var _connectionService = ConnectionService();
+
+  @override
+  void initState() {
+    super.initState();
+    _connectionService.checkConnection(context);
+  }
 
   @override
   void dispose() {
-    _textController.dispose();
     super.dispose();
+    _textController.dispose();
+    _connectionService.dispose();
   }
 
   @override

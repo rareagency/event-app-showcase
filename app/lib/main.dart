@@ -1,7 +1,5 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:eventapp/env.dart';
 import 'package:eventapp/home_screen.dart';
-import 'package:eventapp/widgets/disconnected.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -27,31 +25,12 @@ Future<void> main() async {
   ));
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool _isConnected = false;
-
-  @override
-  void initState() {
-    super.initState();
-    Connectivity().onConnectivityChanged.listen((result) {
-      print("Connection Status has Changed");
-
-      setState(() {
-        _isConnected = result != ConnectivityResult.none;
-      });
-    });
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Event app',
-      home: _isConnected ? HomeScreen() : Disconnected(),
+      home: HomeScreen(), // TODO: Change this to Login() once time is right :)
       theme: ThemeData.light().copyWith(
         accentColor: Colors.blue[700],
         unselectedWidgetColor: Colors.grey[400],
