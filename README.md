@@ -3,7 +3,8 @@
 ![flutter build and test](https://github.com/rareagency/event-app-showcase/workflows/flutter%20build%20and%20test/badge.svg)
 
 Figma prototype:
-https://www.figma.com/proto/Lsu45xsmzu2yX6UNZOojtk/event-app-showcase?node-id=43%3A41&scaling=min-zoom
+
+- https://www.figma.com/proto/Lsu45xsmzu2yX6UNZOojtk/event-app-showcase?node-id=43%3A41&scaling=min-zoom
 
 Main features:
 
